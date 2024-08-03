@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/x-clone-react/static/css/main.82d16c2e.css",
+    "main.js": "/x-clone-react/static/js/main.3d70ea47.js",
+    "static/js/453.c64cd0e0.chunk.js": "/x-clone-react/static/js/453.c64cd0e0.chunk.js",
+    "index.html": "/x-clone-react/index.html",
+    "main.82d16c2e.css.map": "/x-clone-react/static/css/main.82d16c2e.css.map",
+    "main.3d70ea47.js.map": "/x-clone-react/static/js/main.3d70ea47.js.map",
+    "453.c64cd0e0.chunk.js.map": "/x-clone-react/static/js/453.c64cd0e0.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.82d16c2e.css",
+    "static/js/main.3d70ea47.js"
+  ]
+}
