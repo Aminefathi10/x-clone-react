@@ -1,0 +1,21 @@
+.App{
+    margin: 0 auto;
+    display: flex;
+    min-width: 250px;
+}
+.truncate{
+    overflow: hidden;
+}
+i{
+    font-size: 1.2em;
+}
+/* phone screen UI */
+@media screen and (max-width: 440px) {
+    .App{
+        flex-direction: column-reverse;
+        position: relative;
+        height: 100vh;
+        overflow-y: auto;
+        overflow-x: hidden;
+    }
+}

@@ -1,0 +1,17 @@
+:root{
+    padding: 0%;
+    background-color: black;
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+}
+body{
+    margin: 0;
+    padding: 0%;
+}
+button {
+    outline: none;
+  }
+*{
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+}

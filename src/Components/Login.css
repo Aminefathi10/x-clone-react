@@ -1,0 +1,98 @@
+.loginForm{
+    min-width: 250px;
+    max-width: 500px;
+    width: 80%;
+    min-height: 100vh;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+}
+.loginForm i{
+    font-size: 5em;
+    color: white;
+    position: absolute;
+    top: 5%;
+    left: 50%;
+    transform: translate(-50%);
+}
+.loginForm .input__cont{
+    width: 100%;
+    padding: 4px;
+    margin-bottom: 1em;
+    font-size: 1.2em;
+    border-radius: 8px;
+    border: solid #333 1px;
+    height: 2.5em;
+    position: relative;
+    overflow: hidden;
+}
+.loginForm .input__cont:focus-within{
+    border: #00b7ff solid 1px;
+}
+.loginForm .input__cont .label{
+    position: absolute;
+    top: 5px;
+    left: 10px;
+    font-size: 1em;
+    color: gray;
+    transition: 200ms;
+    z-index: -1;
+}
+.loginForm .input__cont:focus-within .label, .labelStyle{
+    top: -10px !important;
+    left: 5px !important;
+    font-size: 0.8em !important;
+}
+.loginForm .input__cont input{
+    width: 100%;
+    border:none;
+    outline: none;
+    height: 100%;
+    padding-top: 0.8em;
+    font-size: 1em;
+    background-color: transparent;
+    color: white;
+    padding-left: 5px;
+    font-family: "Manrope", sans-serif;
+    font-weight: 300;
+}
+.loginForm .submit__button{
+    border: none;
+    outline: none;
+    font-size: 1.2em;
+    color: white;
+    background-color: #00b7ff;
+    padding: 0.4em 1em;
+    width: fit-content;
+    border-radius: 3px;
+    cursor: pointer;
+}
+.show__hide{
+    border: none;
+    outline: none;
+    position: absolute;
+    right: 5px;
+    top: 10%;
+    background-color: transparent;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    outline: none;
+    width: 2.5em;
+    height: 2.5em;
+    cursor: pointer;
+}
+.show__hide i{
+    font-size: 1.2em;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 9999px;
+}
+.show__hide i:hover{
+    background-color: #33333363;
+}
