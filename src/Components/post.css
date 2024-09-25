@@ -1,0 +1,135 @@
+.post{
+    border-bottom: solid 1px #4d4d4d;
+    padding: 0;
+    display: flex;
+    position: relative;
+    transform-origin: top;
+    animation: renderPost 100ms;
+}
+@keyframes renderPost {
+    0%{
+    transform: scale(0);
+    }
+    100%{
+        transform: scale(1);
+    }
+}
+.post .Post__menu{
+    background-color: transparent;
+    border: none;
+    outline: none;
+    position: absolute;
+    top: 0.5em;
+    right: 0.5em;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 2.5em;
+    width: 2.5em;
+    border-radius: 9999px;
+    color: #00b7ff;
+}
+.post .Post__menu:hover{
+    background-color: #00b7ff41;
+    
+}
+.post .Post__menu i{
+    width: 0.5em;
+    transform: translate(100%-0.25em);
+
+}
+.post .post__options__menu{
+    display: none;
+    position: absolute;
+    box-shadow:0 0 5px white;
+    background-color: black;
+    border-radius: 10px;
+    box-shadow: #494949;
+    top: 2em;
+    right: 2em;
+}
+.post .post__options__menu div{
+    padding: 0.25em 1em;
+    cursor: pointer;
+}
+.post .post__options__menu div:hover{
+    background-color: #31313171;
+}
+.post .avatar{
+    width: 3.3em;
+}
+.post .post__info{
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+.post .post__info .user__info{
+    display: flex;
+    margin-top: 0.2em;
+    font-family: "Manrope", sans-serif;
+    cursor: pointer;
+}
+.post .post__info .user__info h1{
+    font-size: 1.1em;
+    font-weight: 300;
+    margin: .1em;
+}
+.post .post__info .user__info h2{
+    font-size: 1.1em;
+    font-weight: 400;
+    margin: .1em;
+    color: #494949;
+}
+.post .post__info .user__info h2:hover{
+    color: #aaa;
+}
+.post .post__info .description{
+    margin: 0 0.1em;
+    margin-bottom: 5px;
+    font-weight: 200;
+}
+.post .post__info .post__pic{
+    width: max-content;
+    max-width: 95%;
+    max-height: 30em;
+    object-fit: cover;
+    border-radius: 0.5em;
+}
+
+
+.post .avatar img{
+    width: 75%;
+    aspect-ratio: 1/1;
+    object-fit: cover;
+    border-radius: 9999px;
+    margin: 5px ;
+}
+.post__options{
+    width: 40%;
+    display: flex;
+    padding: 5px 0;
+}
+.post__options i{
+    cursor: pointer;
+    font-size: 1em;
+    margin-right: 0.33em;
+    width: 1.8em;
+    height: 1.8em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 9999px;
+}
+.post__options .comment:hover{
+    color: #2080ff;
+    background-color: #2773ff1f;
+}
+.post__options .like:hover{
+    color: #ff1722;
+    background-color: #f500001f;
+}
+.post__options .retweet:hover{
+    color: #15ff15;
+    background-color: #16bb001f;
+}

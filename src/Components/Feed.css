@@ -1,0 +1,126 @@
+.Feed{
+    flex: 0.5;
+    border-left: solid 1px #4d4d4d;
+    border-right: solid 1px #4d4d4d;
+}
+.Header{
+    width:full;
+    color: white;
+    display: flex;
+    height: 2.5rem;
+    border-bottom: solid 1px #4d4d4d;
+}
+.head{
+    flex: 1;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    user-select: none;
+}
+.head:hover{
+    background-color: #3a3a3a93;
+}
+@media screen  and (max-width: 440px) {
+    .head:hover{
+        background-color: unset;
+    }
+    .head:active{
+        background-color: #3a3a3a93;
+    }
+}
+.head h1{
+    font-size: 1em;
+    font-weight: 500;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    color: #7c7c7cc2;
+    border-bottom: solid transparent;
+}
+.foryou__folowing{
+    border-bottom: solid #00b7ff !important;
+    color: white !important;
+}
+.CreatePost{
+    width: 100%;
+    border-bottom: solid 1px white;
+    padding-bottom: 0.2em;
+    border-bottom: solid 1px #4d4d4d
+}
+.CreatePost .top__post{
+    display: flex;
+}
+.CreatePost .top__post .userAvatar{
+    margin: 5px;
+    margin-left: 15px;
+    border: solid 1px;
+    border-radius: 9999px;
+    font-size: 1.2em;
+    padding: 3px;
+    height: 2em;
+    width: 2em;
+    display: flex;
+    justify-content: center;
+    align-items: center;  
+    background-color: rgb(0, 100, 158);
+}
+.CreatePost .top__post input{
+    flex: 1;
+    padding: 10px;
+    border: none;
+    outline: none;
+    font-size: 1em;
+    background-color: transparent;
+    color: white;
+    font-weight: 300;
+}
+.CreatePost .bottom__post{
+    width: 100%;
+    display: flex;
+    margin-top: 15px;
+    position: relative;
+}
+.CreatePost .bottom__post .createOptions{
+    color: #00b7ff;
+    flex: 0.4;
+    display: flex;
+    justify-content: space-evenly;
+    margin-left: 2.5em;
+}
+.CreatePost .bottom__post .createOptions *{
+    border-radius: 50%;
+    font-size: 1em;
+    width: 1.7em;
+    height: 1.7em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+.CreatePost .bottom__post .createOptions *:hover{
+    background-color: #00b7ff41;
+}
+.CreatePost .bottom__post button{
+    position: absolute;
+    color: white;
+    right: 2em;
+    bottom: 4px;
+    border: none;
+    background-color: #00b7ff;
+    font-size: 0.9em;
+    border-radius: 9999px;
+    padding: 0.3em 1em;
+    cursor: pointer;
+}
+@media screen and (max-width: 640px) {
+    .Feed{
+        flex: 1;
+    }
+}
+@media screen and (max-width: 440px) {
+    .Feed{
+        border: none;
+    }
+}

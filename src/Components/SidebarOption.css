@@ -1,0 +1,65 @@
+.SidebarOption{
+    margin-left: 0.5em;
+    color: #bbb;
+    display: flex;
+    width: fit-content;
+    padding: 10px;
+    border-radius: 9999px;
+    cursor: pointer;
+    user-select: none;
+    margin-bottom: 5px;
+    font-family: Arial, Helvetica, sans-serif;
+    justify-content: start;
+}
+.SidebarOption:hover{
+    background-color: #3333336e;
+}
+.SidebarOption:focus{
+    background-color: #3333336e;
+}
+.SidebarOption h1{
+    font-size: 1.5em;
+    margin: 0;
+    margin-left: 5px;
+    font-weight: 600;
+    z-index: -1;
+}
+ 
+i{
+    font-size: 1.5em;
+    margin-right: 0.4em;
+}
+
+@media screen and (max-width: 640px) {
+    .SidebarOption h1{
+        display: none;
+    }
+    .SidebarOption{
+        width: fit-content;
+        aspect-ratio: 1/1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .SidebarOption i{
+        transform: translateX(19%);
+    }
+    .Post{
+        padding: 0.8em;
+        font-size: 1.2em;
+    }
+}
+
+@media screen and (max-width: 440px) {
+    .SidebarOption{
+        justify-content: start;
+    }
+    .SidebarOption i{
+        font-size: 1.2em;
+        margin: 0;
+        margin-left: -16px;
+    }
+    .SidebarOption:hover, .SidebarOption:focus{
+        background-color: unset;
+    }
+}
