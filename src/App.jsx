@@ -5,9 +5,8 @@ import Login from "./Components/Login.jsx"
 import Sidebar from './Components/Sidebar';
 import Feed from './Components/Feed';
 import Widgets from './Components/Widgets';
-import { createUserWithEmailAndPassword, onAuthStateChanged } from 'firebase/auth';
+import { createUserWithEmailAndPassword, onAuthStateChanged, signOut } from 'firebase/auth';
 import { auth,} from "./firebase.js";
-import { signOut } from 'firebase/auth';
 
 
 function App() {
