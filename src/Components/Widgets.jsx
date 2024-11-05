@@ -1,12 +1,13 @@
-import React from 'react'
-import "./Widgets.css"
-import Trend from './Trend'
+
+import "./Widgets.css";
+import Trend from './Trend';
+import SearchRoundedIcon from '@mui/icons-material/SearchRounded';
 
 function Widgets() {
   return (
     <div className='Widgets'>
       <div className="serch__section">
-        <i className="fa-solid fa-search"></i>
+        <i><SearchRoundedIcon /></i>
         <input type="text" placeholder='Search' />
       </div>
       <div className="trendings">

@@ -1,11 +1,11 @@
 import React from 'react'
 import "./SidebarOption.css"
 
-function SidebarOption(props) {
+function SidebarOption({title, styleClass, moreButton, icon}) {
   return (
-    <div onClick={props.moreButton} className={props.styleClass}>
-      <i class={props.icon}></i>
-      {props.title && <h1>{props.title}</h1>}
+    <div onClick={moreButton} className={styleClass}>
+      {icon}
+      {title && <h1>{title}</h1>}
     </div>
   )
 }

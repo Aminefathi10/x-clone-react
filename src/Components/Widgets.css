@@ -32,6 +32,9 @@
 .serch__section i{
     padding: 0 1em;
     font-size: 1em;
+    display: flex;
+    align-items: center;
+
 }
 
 .trendings{
