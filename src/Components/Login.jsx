@@ -1,7 +1,7 @@
 
 import "./Login.css"
 
-function Ligin(props) {
+function Ligin({ signUpForm, loading }) {
     function handleInputlabel(e) {
        if (e.target.value !== "") {
         e.target.previousSibling.classList.add("labelStyle");
@@ -22,7 +22,7 @@ function Ligin(props) {
        }
     }
   return (
-      <form className="loginForm" onSubmit={e => props.signUpForm(e)} >
+      <form className="loginForm" onSubmit={e => signUpForm(e)} >
         <i className="fa-brands fa-x-twitter"></i>
         <div className="input__cont">
             <h1 className="label">full name</h1>
@@ -42,7 +42,9 @@ function Ligin(props) {
             <button onClick={e => showHidePassword(e)} type="button" className="show__hide"><i className="fa-regular fa-eye-slash"></i></button>
         </div>
         
-        <button className="submit__button">Sign up</button>
+        <button disabled={loading} className="submit__button">{
+            !loading ? 'Sign up' : 'Loading...'
+        }</button>
       </form>
   )
 }

@@ -1,6 +1,6 @@
 .SidebarOption{
     margin-left: 0.5em;
-    color: #bbb;
+    color: #eee;
     display: flex;
     width: fit-content;
     padding: 10px;
@@ -11,12 +11,11 @@
     font-family: Arial, Helvetica, sans-serif;
     justify-content: start;
 }
-.SidebarOption:hover{
+.SidebarOption:hover, .SidebarOption:focus{
     background-color: #3333336e;
 }
-.SidebarOption:focus{
-    background-color: #3333336e;
-}
+
+
 .SidebarOption h1{
     font-size: 1.5em;
     margin: 0;
@@ -24,9 +23,9 @@
     font-weight: 600;
     z-index: -1;
 }
- 
-i{
-    font-size: 1.5em;
+
+.i{
+    font-size: 2em !important;
     margin-right: 0.4em;
 }
 
@@ -41,7 +40,7 @@ i{
         justify-content: center;
         align-items: center;
     }
-    .SidebarOption i{
+    .SidebarOption .i{
         transform: translateX(19%);
     }
     .Post{
@@ -54,8 +53,8 @@ i{
     .SidebarOption{
         justify-content: start;
     }
-    .SidebarOption i{
-        font-size: 1.2em;
+    .SidebarOption .i{
+        font-size: 1.2em !important;
         margin: 0;
         margin-left: -16px;
     }

@@ -2,7 +2,12 @@ import "./Feed.css";
 import Post from "./Post";
 import { useEffect, useRef, useState } from "react";
 import { db } from "../firebase";
-import { collection, onSnapshot, addDoc, query, orderBy, serverTimestamp, deleteDoc, doc } from "firebase/firestore"
+import { collection, onSnapshot, addDoc, query, orderBy, serverTimestamp, deleteDoc, doc } from "firebase/firestore";
+import ImageRoundedIcon from '@mui/icons-material/ImageRounded';
+import PollRoundedIcon from '@mui/icons-material/PollRounded';
+import EmojiEmotionsRoundedIcon from '@mui/icons-material/EmojiEmotionsRounded';
+import CalendarMonthRoundedIcon from '@mui/icons-material/CalendarMonthRounded';
+
 
 function Feed(props) {
   const collRef = collection(db, "Posts");
@@ -71,10 +76,10 @@ const docsArr = [];
         
         <div className="bottom__post">
           <div className="createOptions">
-            <i className="fa-solid fa-image"></i>
-            <i className="fa-solid fa-square-poll-horizontal"></i>
-            <i className="fa-solid fa-face-smile"></i>
-            <i className="fa-solid fa-calendar"></i>
+            <span><ImageRoundedIcon /></span>
+            <span><PollRoundedIcon /></span>
+            <span><EmojiEmotionsRoundedIcon /></span>
+            <span><CalendarMonthRoundedIcon /></span>
           </div>
           <button>Post</button>
         </div>

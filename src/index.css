@@ -15,3 +15,8 @@ button {
     box-sizing: border-box;
     -webkit-tap-highlight-color: transparent;
 }
+
+input:autofill {
+    background: transparent !important;
+    color: inherit !important;
+}

@@ -91,9 +91,9 @@
 }
 .CreatePost .bottom__post .createOptions *{
     border-radius: 50%;
-    font-size: 1em;
-    width: 1.7em;
-    height: 1.7em;
+    font-size: 0.8em !important;
+    width: 2em;
+    height: 2em;
     display: flex;
     justify-content: center;
     align-items: center;

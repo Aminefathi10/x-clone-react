@@ -1,5 +1,6 @@
-import React from 'react'
-import "./Trend.css"
+
+import "./Trend.css";
+import MoreHorizRoundedIcon from '@mui/icons-material/MoreHorizRounded';
 
 function Trend({name, location, number}) {
   return (
@@ -7,7 +8,7 @@ function Trend({name, location, number}) {
       <p>Trending in {location}</p>
       <h1>{name}</h1>
       <p>{number} Posts</p>
-      <i className="fa-solid fa-ellipsis"></i>
+      <i><MoreHorizRoundedIcon /></i>
     </div>
   )
 }
