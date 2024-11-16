@@ -1,6 +1,7 @@
 import "./Feed.css";
 import Post from "./Post";
 import { useEffect, useRef, useState } from "react";
+import { useSelector } from "react-redux";
 import { db } from "../firebase";
 import { collection, onSnapshot, addDoc, query, orderBy, serverTimestamp, deleteDoc, doc } from "firebase/firestore";
 import ImageRoundedIcon from '@mui/icons-material/ImageRounded';
@@ -9,26 +10,34 @@ import EmojiEmotionsRoundedIcon from '@mui/icons-material/EmojiEmotionsRounded';
 import CalendarMonthRoundedIcon from '@mui/icons-material/CalendarMonthRounded';
 
 
-function Feed(props) {
+function Feed() {
   const collRef = collection(db, "Posts");
-  const q = query(collRef, orderBy("postedAt", "desc"))
+  const q = query(collRef, orderBy("postedAt", "desc"));
+  const {uid, name, photoURL, username} = useSelector(state => state.user.user);
+
+
   const [ posts, setPosts ] = useState([]);
   const handleSubmit = (e) => {
     e.preventDefault();
     addDoc(collRef, {
-      name: null,
-      username: "@" + props.userEmail.slice(0, props.userEmail.indexOf("@")),
+      uid: uid,
+      name: name,
+      username: username,
       description: e.target.post_input.value,
-      avatar: null,
-      postImg: null,
+      avatar: photoURL,
+      postImg: 'https://pbs.twimg.com/media/GcY4MIBWYAEpF-K?format=jpg&name=small',
       postedAt: serverTimestamp()
+    }).then(() => {
+      console.log('post added')
+    }).catch(error => {
+      console.log("error adding the post", error)
     });
     e.target.reset();
   };
 
 useEffect(() => {
  onSnapshot(q, function(snap) {
-const docsArr = [];
+  const docsArr = [];
       snap.docs.forEach(doc => {
         console.log(doc)
         docsArr.push({...doc.data(), id: doc.id})
@@ -67,11 +76,11 @@ const docsArr = [];
         <div className='head' ref={el => (parentRefs.current[0] = el)} onClick={() => handleFeed(0)}><h1 className="foryou__folowing">For you</h1></div>
         <div className='head' ref={el => (parentRefs.current[1] = el)} onClick={() => handleFeed(1)}><h1>Following</h1></div>
       </div>
-      <form className="CreatePost" onSubmit={handleSubmit}>
+      <form className="CreatePost" onSubmit={e => handleSubmit(e)}>
         <div className="top__post">
           {/* <i className="fa-solid fa-user"></i> */}
-          <p className="userAvatar">{props.userEmail.slice(0, 1)}</p>
-          <input name="post_input" type="text" placeholder="What's up?!" required />
+          {photoURL !== "" ? <img src={photoURL} className="userAvatar" alt='a' /> : <p className="userAvatar">{name.slice(0, 1)}</p>}
+          <input autocomplete="off" name="post_input" type="text" placeholder="What's up?!" required />
         </div>
         
         <div className="bottom__post">

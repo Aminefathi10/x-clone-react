@@ -26,11 +26,20 @@ function Post(props){
                 <h2 className="username">{props.username}</h2>
             </div>
             <p className="description">{props.description}</p>
-            {props.image && <img className='post__pic' src={props.image} alt="" />}
+            {props.image && <div className='post_pic_container'><img className='post__pic' src={props.image} alt="" /></div>}
             <div className="post__options">
-              <i className='icons comment'><CommentIcon /></i>
-              <i className='icons like'><FavoriteBorderIcon /></i>
-              <i className='icons retweet'><CachedIcon /></i>
+              <button className='react_btn comment'>
+              <CommentIcon />
+              <p>1k</p>
+              </button>
+              <button className='react_btn like'>
+              <FavoriteBorderIcon />
+              <p>1k</p>
+              </button>
+              <button className='react_btn retweet'>
+              <CachedIcon />
+              <p>1k</p>
+              </button>
             </div>
         </div>
         

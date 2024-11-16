@@ -10,13 +10,17 @@ body{
 }
 button {
     outline: none;
+    border: none;
+    background: transparent;
+    cursor: pointer;
   }
 *{
     box-sizing: border-box;
     -webkit-tap-highlight-color: transparent;
 }
 
-input:autofill {
-    background: transparent !important;
-    color: inherit !important;
-}
+
+@font-face {
+    font-family: Antipasto;
+    src: url('./assets/fonts/AntipastoPro-DemiBold_trial.ttf');
+  }
