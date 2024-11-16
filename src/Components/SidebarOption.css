@@ -1,6 +1,6 @@
 .SidebarOption{
+    position: relative;
     margin-left: 0.5em;
-    color: #eee;
     display: flex;
     width: fit-content;
     padding: 10px;
@@ -10,9 +10,24 @@
     margin-bottom: 5px;
     font-family: Arial, Helvetica, sans-serif;
     justify-content: start;
+    align-items: center;
 }
+
 .SidebarOption:hover, .SidebarOption:focus{
-    background-color: #3333336e;
+    anchor-name: --x;
+}
+
+.sidebar::after{
+    content: "";
+    background-color: #fff1;
+    border-radius: 999px;
+    width: anchor-size(--x width);
+    height: anchor-size(--x height);
+    position: absolute;
+    top: anchor(--x top);
+    left: anchor(--x left);
+    z-index: -1;
+    transition: 100ms;
 }
 
 
