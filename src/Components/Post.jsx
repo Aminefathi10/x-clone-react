@@ -3,16 +3,52 @@ import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import CachedIcon from '@mui/icons-material/Cached';
 import MoreHorizRoundedIcon from '@mui/icons-material/MoreHorizRounded';
+import { db } from '../firebase';
+import { updateDoc, doc, increment, arrayUnion, arrayRemove } from 'firebase/firestore';
 import "./post.css"
+import { useRef, useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { likePost, dislikePost } from '../features/user/userSlice';
+
 
 function Post(props){
+
+  const dispatch = useDispatch();
+
+  const menuRef = useRef(null);
+  const [isLiked, setIsLiked] = useState(props.likedPosts.includes(props.id));
+
+  function handlePostLike(){
+    setIsLiked(true);
+    if(!isLiked) {
+      dispatch(likePost(props.id));
+      updateDoc(doc(db, 'Posts', props.id), {
+      likes: increment(1)
+    });
+    updateDoc(doc(db, 'users', props.uid), {
+      likedPosts: arrayUnion(props.id)
+    }).then(() => {
+      alert('post liked')
+    })
+    } else {
+      setIsLiked(false);
+        dispatch(dislikePost(props.id))
+        updateDoc(doc(db, 'Posts', props.id), {
+        likes: increment(-1)
+      });
+      updateDoc(doc(db, 'users', props.uid), {
+        likedPosts: arrayRemove(props.id)
+      })
+    }
+    
+  }
+
     return (
           <div className='post'>
           <button onClick={() => {
-           const menu = document.getElementById(props.menuOptions);
-           menu.style.display = menu.style.display === "none" ? "block" : "none";
+           menuRef.current.style.display = menuRef.current.style.display === "none" ? "block" : "none";
           }} className='Post__menu'><MoreHorizRoundedIcon /></button>
-            <div className="post__options__menu" id={props.menuOptions}>
+            <div className="post__options__menu" ref={menuRef}>
               <div onClick={props.deletePost} className="delete">Delete Post</div>
               <div className="delete">Block User</div>
               <div className="delete">Report</div>
@@ -30,15 +66,15 @@ function Post(props){
             <div className="post__options">
               <button className='react_btn comment'>
               <CommentIcon />
-              <p>1k</p>
+              <p>0</p>
               </button>
-              <button className='react_btn like'>
-              <FavoriteBorderIcon />
-              <p>1k</p>
+              <button onClick={handlePostLike} className='react_btn like'>
+              {!isLiked ? <FavoriteBorderIcon /> : <FavoriteIcon style={{color: 'red'}} />}
+              <p style={{color: isLiked ? 'red' : 'inherit'}}>{props.likes}</p>
               </button>
               <button className='react_btn retweet'>
               <CachedIcon />
-              <p>1k</p>
+              <p>0</p>
               </button>
             </div>
         </div>

@@ -130,11 +130,11 @@
 .react_btn p{
     position: absolute;
     top: clac(50% - 5px);
-    left: 23.8px;
+    left: 25px;
 }
 
 .post__options .comment:hover{
-    color: #000cb4 !important;
+    color: #3056ff !important;
     background-color: #2773ff1f;
 }
 .post__options .like:hover{

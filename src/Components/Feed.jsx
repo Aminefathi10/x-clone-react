@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
 import { db } from "../firebase";
 import { collection, onSnapshot, addDoc, query, orderBy, serverTimestamp, deleteDoc, doc } from "firebase/firestore";
+import defaultAvatar from '/avatar.png'
 import ImageRoundedIcon from '@mui/icons-material/ImageRounded';
 import PollRoundedIcon from '@mui/icons-material/PollRounded';
 import EmojiEmotionsRoundedIcon from '@mui/icons-material/EmojiEmotionsRounded';
@@ -13,7 +14,8 @@ import CalendarMonthRoundedIcon from '@mui/icons-material/CalendarMonthRounded';
 function Feed() {
   const collRef = collection(db, "Posts");
   const q = query(collRef, orderBy("postedAt", "desc"));
-  const {uid, name, photoURL, username} = useSelector(state => state.user.user);
+
+  const {uid, name, photoURL, username, likedPosts} = useSelector(state => state.user.user);
 
 
   const [ posts, setPosts ] = useState([]);
@@ -25,7 +27,8 @@ function Feed() {
       username: username,
       description: e.target.post_input.value,
       avatar: photoURL,
-      postImg: 'https://pbs.twimg.com/media/GcY4MIBWYAEpF-K?format=jpg&name=small',
+      postImg: null,
+      likes: 0,
       postedAt: serverTimestamp()
     }).then(() => {
       console.log('post added')
@@ -35,16 +38,15 @@ function Feed() {
     e.target.reset();
   };
 
+
 useEffect(() => {
  onSnapshot(q, function(snap) {
   const docsArr = [];
       snap.docs.forEach(doc => {
-        console.log(doc)
         docsArr.push({...doc.data(), id: doc.id})
       })
     setPosts(docsArr)
   }) 
- 
       
 }, [])
 
@@ -79,13 +81,17 @@ useEffect(() => {
       <form className="CreatePost" onSubmit={e => handleSubmit(e)}>
         <div className="top__post">
           {/* <i className="fa-solid fa-user"></i> */}
-          {photoURL !== "" ? <img src={photoURL} className="userAvatar" alt='a' /> : <p className="userAvatar">{name.slice(0, 1)}</p>}
+          {photoURL !== "" ? <img src={photoURL} className="userAvatar" alt='a' /> : <img className="userAvatar" src={defaultAvatar} alt="a" />}
           <input autocomplete="off" name="post_input" type="text" placeholder="What's up?!" required />
         </div>
+
         
         <div className="bottom__post">
           <div className="createOptions">
-            <span><ImageRoundedIcon /></span>
+            <label form="imageIn">
+              <span><ImageRoundedIcon /></span>
+              <input style={{display: 'none'}} type="file" name="image" id="imageIn" />
+            </label>
             <span><PollRoundedIcon /></span>
             <span><EmojiEmotionsRoundedIcon /></span>
             <span><CalendarMonthRoundedIcon /></span>
@@ -94,7 +100,7 @@ useEffect(() => {
         </div>
       </form>
       <div className="posts">
-      { posts.map(post => <Post deletePost={() => deletePost(post.id)} key={post.id} menuOptions={post.id} avatar={post.avatar} name={post.name} username={post.username} description={post.description} image={post.postImg ? post.postImg : ""} />)  }
+      { posts.map(post => <Post deletePost={() => deletePost(post.id)} key={post.id} id={post.id} avatar={post.avatar} name={post.name} username={post.username} description={post.description} image={post.postImg ? post.postImg : ""} likedPosts={likedPosts} likes={post.likes} uid={uid} />)  }
       </div>
     </div>
   )
