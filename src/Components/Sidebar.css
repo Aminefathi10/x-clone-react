@@ -1,4 +1,5 @@
 .sidebar{
+    padding-top: 10px;
     flex: 0.2;
     display: flex;
     flex-direction: column;
@@ -85,11 +86,12 @@
         z-index: 999;
         background-color: rgba(0, 0, 0, 0.938);
     }
-    .sidebar .SidebarOption, .SidebarOption h1, .Post{
+    .sidebar button, .SidebarOption h1, .Post{
         display: none;
     }
-    .PhoneOptions{
+    button:has(.PhoneOptions) {
         display: flex !important;
+        font-size: 1.2em;
     }
     .sidebar::after{
         display: none;

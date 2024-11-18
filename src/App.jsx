@@ -8,14 +8,14 @@ import { createUserWithEmailAndPassword, onAuthStateChanged, signOut, updateProf
 import { auth, db } from "./firebase.js";
 import { useDispatch } from 'react-redux';
 import { getUser } from './features/user/userSlice.js';
-import { addDoc, collection } from 'firebase/firestore';
+import { doc, getDoc, setDoc, updateDoc } from 'firebase/firestore';
 
-const linkRegEx = /https:\/\/[^\s\/]+\/[^\s]*/
+const linkRegEx = /https:\/\/[^\s/]+\/[^\s]*/
 
 
 function App() {
   const [authenticated, setAuthenticated] = useState(false);
-  const [loading, setLoading] = useState(false);
+  let loading = false;
   const dispatch = useDispatch();
 
 
@@ -23,7 +23,7 @@ function App() {
   async function signUp(e, s) {
 
     e.preventDefault();
-    // setLoading(true);
+    loading = true;
     if(e.target.photoURL.value !== "" && !linkRegEx.test(e.target.photoURL.value)){
       alert('Enter a valid photo URL');
     }
@@ -31,27 +31,30 @@ function App() {
       if(s){
              createUserWithEmailAndPassword(auth, e.target.email.value, e.target.password.value)
             .then((creds) => {
-              console.log('signed Up', creds);
               updateProfile(creds.user, {
                 displayName: e.target.fullName.value,
                 photoURL: e.target.photoURL.value
               }).then(() => {
                 auth.currentUser.reload().then(() => {
-                  console.log('Updated user data', auth.currentUser);
                   dispatch(getUser({
                     uid: auth.currentUser.uid,
                     name: auth.currentUser.displayName,
                     email: auth.currentUser.email,
                     photoURL: auth.currentUser.photoURL,
-                    username: '@' + auth.currentUser.email.slice(0, auth.currentUser.email.indexOf('@'))
+                    username: '@' + auth.currentUser.email.slice(0, auth.currentUser.email.indexOf('@')),
+                    likedPosts: [],
+                    reposts: [],
                   }));
 
-                  addDoc(collection(db, 'users'), {
-                    uid: auth.currentUser.uid,
+                  setDoc(doc(db, 'users', auth.currentUser.uid), {
                     name: auth.currentUser.displayName,
                     email: auth.currentUser.email,
                     photoURL: auth.currentUser.photoURL,
-                    username: '@' + auth.currentUser.email.slice(0, auth.currentUser.email.indexOf('@'))
+                    username: '@' + auth.currentUser.email.slice(0, auth.currentUser.email.indexOf('@')),
+                    likedPosts: [],
+                    reposts: [],
+                    followers: [],
+                    followings: []
                   });
                 });
               }).catch((error) => { 
@@ -62,24 +65,26 @@ function App() {
           } else {
             signInWithEmailAndPassword(auth, e.target.email.value, e.target.password.value);
           }
-    // setLoading(false);
+    loading = false;
     
   }
- 
 
 
-  onAuthStateChanged(auth, user => {
+  onAuthStateChanged(auth, async user => {
   
     if (user) {
-      setAuthenticated(true);
       if(user.displayName){
+       await getDoc(doc(db, 'users', user.uid)).then(doc => {
         dispatch(getUser({
-        uid: user.uid,
-        name: user.displayName,
-        email: user.email,
-        photoURL: user.photoURL,
-        username: '@' + auth.currentUser.email.slice(0, auth.currentUser.email.indexOf('@'))
-      }));
+            uid: user.uid,
+            ...doc.data()
+          }));
+       }).catch(err => {
+        console.log(err)
+       })
+    
+        setAuthenticated(true);
+      
       }
       
     } else {

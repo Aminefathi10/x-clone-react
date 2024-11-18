@@ -55,7 +55,7 @@ export default function Login({ signUpForm, loading }) {
             <div className="btns">
                 <button type='submit' disabled={loading} className="submit__button">{loading ? 'Loading...' : signUp ? 'Sign Up' : 'Sign In'}</button>
 
-                <p>{signUp ? 'Already have an account? ' : 'New? '}<button type='button' onClick={handleFormSwitch}>{signUp ? 'Sign in' : 'Sign up'}</button></p>
+                <p>{signUp ? 'Already a member? ' : 'New? '}<button type='button' onClick={handleFormSwitch}>{signUp ? 'Sign in' : 'Sign up'}</button></p>
             </div> 
         </form>
         

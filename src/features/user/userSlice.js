@@ -8,11 +8,17 @@ export const userSlice = createSlice({
   reducers: {
     getUser: (state, action) => {
       state.user = action.payload
+    },
+    likePost: (state, action) => {
+      state.user.likedPosts.push(action.payload)
+    },
+    dislikePost: (state, action) => {
+      state.user.likedPosts.splice(state.user.likedPosts.indexOf(action.payload), 1)
     }
   },
 })
 
 
-export const { getUser } = userSlice.actions
+export const { getUser, likePost, dislikePost } = userSlice.actions
 
 export default userSlice.reducer
