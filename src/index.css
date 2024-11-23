@@ -1,4 +1,6 @@
 :root{
+    -webkit-text-size-adjust: 100%;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
     padding: 0%;
     background-color: black;
     color: white;
@@ -7,6 +9,7 @@
 body{
     margin: 0;
     padding: 0%;
+    transition: 200ms;
 }
 button {
     outline: none;
@@ -20,6 +23,15 @@ button {
     -webkit-tap-highlight-color: transparent;
 }
 
+
+body::-webkit-scrollbar-track{
+    width: 5px;
+    background: rgb(68, 68, 68);
+}
+body::-webkit-scrollbar-thumb{
+    width: 5px;
+    background: rgb(10, 10, 10);
+}
 
 @font-face {
     font-family: Antipasto;
