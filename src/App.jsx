@@ -8,7 +8,7 @@ import { createUserWithEmailAndPassword, onAuthStateChanged, signOut, updateProf
 import { auth, db } from "./firebase.js";
 import { useDispatch } from 'react-redux';
 import { getUser } from './features/user/userSlice.js';
-import { doc, getDoc, setDoc, updateDoc } from 'firebase/firestore';
+import { doc, getDoc, setDoc } from 'firebase/firestore';
 
 const linkRegEx = /https:\/\/[^\s/]+\/[^\s]*/
 
@@ -104,7 +104,7 @@ function App() {
           <Sidebar signout={signout} />
           <Feed />
           <Widgets/>
-     </>
+        </>
        }
     </div>
   );

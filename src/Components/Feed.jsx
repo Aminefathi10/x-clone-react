@@ -4,7 +4,6 @@ import { useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
 import { db } from "../firebase";
 import { collection, onSnapshot, addDoc, query, orderBy, serverTimestamp, deleteDoc, doc } from "firebase/firestore";
-import defaultAvatar from '/avatar.png'
 import ImageRoundedIcon from '@mui/icons-material/ImageRounded';
 import PollRoundedIcon from '@mui/icons-material/PollRounded';
 import EmojiEmotionsRoundedIcon from '@mui/icons-material/EmojiEmotionsRounded';
@@ -15,7 +14,7 @@ function Feed() {
   const collRef = collection(db, "Posts");
   const q = query(collRef, orderBy("postedAt", "desc"));
 
-  const {uid, name, photoURL, username, likedPosts} = useSelector(state => state.user.user);
+  const {uid, likedPosts, name, username, photoURL} = useSelector(state => state.user.user);
 
 
   const [ posts, setPosts ] = useState([]);
@@ -25,10 +24,11 @@ function Feed() {
       uid: uid,
       name: name,
       username: username,
+      photoURL: photoURL,
       description: e.target.post_input.value,
-      avatar: photoURL,
       postImg: null,
       likes: 0,
+      comments: 0,
       postedAt: serverTimestamp()
     }).then(() => {
       console.log('post added')
@@ -37,7 +37,6 @@ function Feed() {
     });
     e.target.reset();
   };
-
 
 useEffect(() => {
  onSnapshot(q, function(snap) {
@@ -61,6 +60,7 @@ useEffect(() => {
   function handleFeed(clickedIndex){
     
     parentRefs.current.forEach((ref, index) => {
+      console.log('functinon called')
       if (ref) {
         const child = ref.querySelector('h1');
         if (index === clickedIndex) {
@@ -81,7 +81,7 @@ useEffect(() => {
       <form className="CreatePost" onSubmit={e => handleSubmit(e)}>
         <div className="top__post">
           {/* <i className="fa-solid fa-user"></i> */}
-          {photoURL !== "" ? <img src={photoURL} className="userAvatar" alt='a' /> : <img className="userAvatar" src={defaultAvatar} alt="a" />}
+          <img src={photoURL ? photoURL : '/avatar.png'} className="userAvatar" alt='a' /> 
           <input autocomplete="off" name="post_input" type="text" placeholder="What's up?!" required />
         </div>
 
@@ -100,7 +100,7 @@ useEffect(() => {
         </div>
       </form>
       <div className="posts">
-      { posts.map(post => <Post deletePost={() => deletePost(post.id)} key={post.id} id={post.id} avatar={post.avatar} name={post.name} username={post.username} description={post.description} image={post.postImg ? post.postImg : ""} likedPosts={likedPosts} likes={post.likes} uid={uid} />)  }
+      { posts.map(post => <Post post={post} deletePost={deletePost} key={post.id}  likedPosts={likedPosts} currentUser={uid} />)  }
       </div>
     </div>
   )

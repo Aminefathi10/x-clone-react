@@ -99,7 +99,7 @@
 }
 
 
-.post .avatar img{
+.avatar img{
     width: 85%;
     aspect-ratio: 1/1;
     object-fit: cover;
@@ -144,4 +144,7 @@
 .post__options .retweet:hover{
     color: #00990d !important;
     background-color: #16bb001f;
+}
+.overflow-hidden{
+    overflow:hidden;
 }

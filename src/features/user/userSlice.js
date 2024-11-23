@@ -14,11 +14,17 @@ export const userSlice = createSlice({
     },
     dislikePost: (state, action) => {
       state.user.likedPosts.splice(state.user.likedPosts.indexOf(action.payload), 1)
+    },
+    repost: (state, action) => {
+      state.user.reposts.push(action.payload)
+    },
+    rmReposts: (state, action) => {
+      state.user.reposts.splice(state.user.reposts.indexOf(action.payload), 1)
     }
   },
 })
 
 
-export const { getUser, likePost, dislikePost } = userSlice.actions
+export const { getUser, likePost, dislikePost, repost, rmReposts } = userSlice.actions
 
 export default userSlice.reducer

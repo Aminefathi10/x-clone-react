@@ -63,7 +63,6 @@
     display: flex;
     justify-content: center;
     align-items: center;  
-    background-color: rgb(0, 162, 255);
 }
 .CreatePost .top__post input{
     flex: 1;
@@ -88,17 +87,19 @@
     justify-content: space-evenly;
     margin-left: 2.5em;
 }
-.CreatePost .bottom__post .createOptions *{
+.createOptions span, .createOptions label{
     border-radius: 50%;
-    font-size: 0.8em !important;
-    width: 2em;
-    height: 2em;
+    width: 1.6em;
+    height: 1.6em;
     display: flex;
     justify-content: center;
     align-items: center;
     cursor: pointer;
 }
-.CreatePost .bottom__post .createOptions *:hover{
+.createOptions span svg{
+    font-size: 1.2em !important;
+}
+.createOptions span:hover, .createOptions label:hover{
     background-color: #00b7ff41;
 }
 .CreatePost .bottom__post button{

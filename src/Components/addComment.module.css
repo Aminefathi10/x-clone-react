@@ -1,0 +1,174 @@
+.container{
+    display: flex;
+    flex-direction: column;
+    width: 45%;
+    min-width: 500px;
+    height: 60vh;
+    padding: 8px;
+    background-color: #000000;
+    border-radius: 10px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border: solid .5px;
+    z-index: 20;
+    overflow-y: auto;
+}
+
+.container::after{
+    content: "";
+    position: absolute;
+    width: 2px;
+    background-color: #888888;
+    top: anchor(--top bottom);
+    bottom: anchor(--bottom top);
+    left: calc(anchor(--bottom left) + 16px);
+}
+
+.top button{
+    font-size: 1em;
+    width: 2em;
+    aspect-ratio: 1/1;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+}
+.top button:hover{
+    background-color: #fff1;
+}
+
+.postOwner{
+    display: flex;
+    gap: 7px;
+}
+.ownerAvatar{
+    width: 35px;
+    padding-top: 10px;
+}
+.ownerAvatar img {
+    anchor-name: --top;
+    aspect-ratio: 1/1;
+    border-radius: 50%;
+}
+.ownerData {
+    display: flex;
+    gap: 5px;
+    margin-top: 10px;
+    padding: 3px 0;
+    align-items: center;
+}
+.ownerData *{
+    font-size: 1.1em;
+    margin: 0;
+    padding: 0;
+}
+.ownerData *:not(p){
+    font-family: "Manrope", Arial, Helvetica, sans-serif;
+}
+
+.ownerData h2{
+    color: #fff7;
+}
+.ownerData h2:hover{
+    color: #fff9;
+}
+.ownerData p{
+    font-size: 1em;
+    margin-top: 2px;
+}
+
+.desc{
+    margin: 0;
+    font-size: 1.2em;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    -webkit-line-clamp: 1;
+}
+
+.replyTo{
+    padding-left: 2.5em;
+    color: rgb(0, 132, 255);
+    font-size: 1em;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif, Arial, Helvetica, sans-serif;
+    margin: 10px 0;
+}
+
+.body{
+    display: flex;
+    flex: 1;
+}
+.avatar{
+    width: 35px;
+    padding-top: 10px;
+}
+.avatar img {
+    anchor-name: --bottom;
+    aspect-ratio: 1/1;
+    border-radius: 50%;
+}
+.body > form{
+    padding: 5px 0;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.body > form textarea{
+    width: 100%;
+    flex: 1;
+    background-color: transparent;
+    font-size: 1.2em;
+    padding: 8px;
+    border: none;
+    outline: none;
+    color: #fff !important;
+    vertical-align: top;
+    white-space: wrap;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-weight: 300;
+    font-size: 1.2em;
+    resize: none;
+}
+
+.btns{
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+}
+
+.btns button{
+    font-size: 1.2em;
+    padding: 5px 20px;
+    background-color: #1395ff;
+    color: #fff;
+    border-radius: 9999px;
+    margin-right: 15px;
+}
+
+.options{
+    display: flex;
+    width: fit-content;
+    gap: 10px;
+    align-items: end;
+}
+
+.options label{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 2em;
+    aspect-ratio: 1/1;
+    border-radius: 50%;
+    color: #1395ff;
+    cursor: pointer;
+}
+.options label:hover{
+    background-color: #1395ff42;
+}
+.options label *{
+    font-size: 1.2em;
+}
