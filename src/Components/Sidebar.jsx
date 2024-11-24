@@ -91,7 +91,11 @@ function Sidebar({signout, authenticated}) {
             <button className='display-none' onClick={() => handleMenu('')}><SidebarOption styleClass='SidebarOption' icon={<ArrowBackIcon className="i" />} title="Main" /></button>
           </div>
       </div>
-      <button className="Post">{width <= 640 ? <PostAddIcon /> : "Post"}</button>
+      <button onClick={() => {
+        document.body.scrollTop = 0;
+        document.documentElement.scrollTop = 0;
+        document.getElementById('post_input').focus();
+      }} className="Post">{width <= 640 ? <PostAddIcon /> : "Post"}</button>
     </div>
     <div onClick={handleMenu} ref={shadowRef} className='shadow' />
   </>

@@ -51,7 +51,7 @@ export default function Login() {
                await  createUserWithEmailAndPassword(auth, event.target.email.value, event.target.password.value)
                 .then((creds) => {
                   updateProfile(creds.user, {
-                    displayName: event.target.fullNamevent.value,
+                    displayName: event.target.fullName.value,
                     photoURL: event.target.photoURL.value
                   }).then(() => {
                     auth.currentUser.reload().then(() => {

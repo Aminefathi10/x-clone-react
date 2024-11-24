@@ -34,6 +34,7 @@ function Feed() {
       description: e.target.post_input.value,
       postImg: null,
       likes: 0,
+      reposts: 0,
       comments: 0,
       postedAt: serverTimestamp()
     }).then(() => {
@@ -88,7 +89,7 @@ useEffect(() => {
         <div className="top__post">
           {/* <i className="fa-solid fa-user"></i> */}
           <img src={photoURL ? photoURL : '/avatar.png'} className="userAvatar" alt='a' /> 
-          <input autocomplete="off" name="post_input" type="text" placeholder="What's up?!" required />
+          <input autocomplete="off" id="post_input" name="post_input" type="text" placeholder="What's up?!" required />
         </div>
 
         

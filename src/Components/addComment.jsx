@@ -23,13 +23,11 @@ export default function Comment({post: {name, username, photoURL, description}, 
             likes: 0,
             postedAt: serverTimestamp()
         }).then(res => {
-            console.log('rely added', res);
             updateDoc(doc(db, 'Posts', id), {
                 comments: increment(1)
             })
             hideForm();
         }).catch(err => {
-            console.log(err);
             hideForm();
         })
     }
