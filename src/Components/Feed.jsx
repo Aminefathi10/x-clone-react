@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
 import { db } from "../firebase";
 import { collection, onSnapshot, addDoc, query, orderBy, serverTimestamp, deleteDoc, doc } from "firebase/firestore";
+import { useNavigate } from "react-router";
 import ImageRoundedIcon from '@mui/icons-material/ImageRounded';
 import PollRoundedIcon from '@mui/icons-material/PollRounded';
 import EmojiEmotionsRoundedIcon from '@mui/icons-material/EmojiEmotionsRounded';
@@ -13,6 +14,7 @@ import CalendarMonthRoundedIcon from '@mui/icons-material/CalendarMonthRounded';
 function Feed() {
   const collRef = collection(db, "Posts");
   const q = query(collRef, orderBy("postedAt", "desc"));
+  const route = useNavigate();
 
   const {uid, likedPosts, name, username, photoURL} = useSelector(state => state.user.user);
 
@@ -20,6 +22,10 @@ function Feed() {
   const [ posts, setPosts ] = useState([]);
   const handleSubmit = (e) => {
     e.preventDefault();
+    if(!uid){
+      route('/signup')
+      return;
+    }
     addDoc(collRef, {
       uid: uid,
       name: name,
