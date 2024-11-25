@@ -86,7 +86,7 @@ export default function Comment({post: {name, username, photoURL, description}, 
                 </form>
             </div>
         </main>
-        <div onClick={hideForm} style={{position: 'absolute', width: '100vw', height: '100vh', zIndex: 10, top: 0, left: 0, background: '#fff1'}} />
+        <div onClick={hideForm} style={{position: 'fixed', width: '100vw', height: '100vh', zIndex: 10, top: 0, left: 0, background: '#fff1'}} />
     </>
     
   )

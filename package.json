@@ -21,7 +21,7 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "dev": "vite --port 3000 --host 192.168.69.29",
+    "dev": "vite --port 3000",
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview --port 4000 --host 192.168.146.29",

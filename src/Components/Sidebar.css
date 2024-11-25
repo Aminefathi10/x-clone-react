@@ -4,6 +4,8 @@
     height: 100vh;
     overflow-y: auto;  
     overflow-x: hidden;
+    position: sticky;
+    top: 0;
 }
 .optionsWrapper{
     width: 200%;
@@ -101,6 +103,7 @@
         width: 100vw;
         position: fixed;
         bottom: 0;
+        top: unset;
         z-index: 999;
         background-color: rgba(0, 0, 0, 0.938);
         
@@ -158,6 +161,9 @@
         transform: translateY(100%);
         transition: 200ms ease-in-out;
     }
+    .sidebar.secondary button{
+        width: 100%;
+    }
     .show-more{
         transform: translateY(0) !important;
     }
@@ -189,7 +195,7 @@
         height: 100vh;
         background-color: #ffffff00;
         z-index: 998;
-        position: absolute;
+        position: fixed;
         top: 0;
         left: 0;
     }
