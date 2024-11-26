@@ -1,0 +1,105 @@
+.profile_pics{
+    width: 100%;
+    aspect-ratio: 4/1;
+    background: #00aeff;
+    position: relative;
+}
+
+.image_container {
+    width: 7em;
+    aspect-ratio: 1/1;
+    position: absolute;
+    left: 1.5em;
+    bottom: 0;
+    transform: translateY(50%);
+    border-radius: 50%;
+    overflow: hidden;
+    padding: 3px;
+    background-color: #ffffff;
+}
+.image_container img {
+    width: 100%;
+    aspect-ratio: 1/1;
+    object-fit: cover;
+    border-radius: 999px;
+}
+.user_data{
+    padding: 0.3em;
+    padding-top: 3.7em;
+    font-family: "Manrope", sans-serif;
+}
+.name{
+    font-size: 1.5em;
+    font-weight: 400;
+    margin: 0;
+    padding: 0;
+}
+.username{
+    font-size: 1.2em;
+    font-weight: 300;
+    color: #3d3d3d;
+    margin: 0;
+    padding: 0;
+    margin-top: -0.2em;
+}
+.bio{
+    font-size: 1em;
+    margin: 0.4em 0;
+}
+.joining_date{
+    display: flex;
+    align-items: center;
+    font-size: 1em;
+    margin: 0.5em 0;
+    color: #555;
+    font-weight: 300;
+    margin: 0.2em 0;
+    gap: 3px;
+}
+.joining_date *{
+    font-size: 1em !important;
+}
+
+.follows{
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 0.3em;
+    padding-top: 0;
+}
+.follows h1{ 
+    font-size: 1em;
+    font-weight: 300;
+    font-family: "Manrope", sans-serif;
+    color: #666666;
+    margin: 0;
+    cursor: pointer;
+}
+.follows h1 span{
+    color: white;
+}
+
+.top_bar{
+    padding-top: 0.4em;
+}
+.top_bar nav {
+    display: flex;
+    justify-content: center;
+    cursor: pointer;
+    transition: 200ms;
+    border-bottom: #4d4d4d solid 1px;
+}
+
+.top_bar nav h1{
+    margin: 1px;
+    padding: 10px 0;
+    font-size: 1.3em;
+    color: white;
+    font-weight: 400;
+    font-family: "Manrope", sans-serif;
+    width: fit-content;
+    border-bottom: #00aeff solid 2px;
+}
+.top_bar nav:hover{
+    background-color: #ffffff11;
+}
