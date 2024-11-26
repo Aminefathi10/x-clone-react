@@ -105,8 +105,8 @@
         bottom: 0;
         top: unset;
         z-index: 999;
-        background-color: rgba(0, 0, 0, 0.938);
-        
+        background-color: #000000d3;
+        overflow: hidden;
     }
     .overflow-visible{
         overflow: visible !important;

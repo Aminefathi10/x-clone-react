@@ -9,7 +9,7 @@ import "./post.css"
 import { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { likePost, dislikePost, repost, rmReposts } from '../features/user/userSlice';
-import { useNavigate } from 'react-router';
+import { useNavigate, Link } from 'react-router';
 import Comment from './addComment';
 
 
@@ -19,9 +19,11 @@ export default function Post({post : { uid, description, postImg, likes, id, nam
   const route = useNavigate();
   const {userAvatar, reposts, likedPosts} = useSelector(state => state.user.user);
   const [isRepleying, setIsRepleying] = useState(false);
+  const [isMenuDisplay, setIsmenuDisplay] = useState(false);
     
 
   const menuRef = useRef(null);
+  const menuBtnRef = useRef(null);
   const [isLiked, setIsLiked] = useState(likedPosts.includes(id));
   const [isReposted, setIsReposted] = useState(reposts.includes(id));
 
@@ -100,27 +102,44 @@ export default function Post({post : { uid, description, postImg, likes, id, nam
     setIsRepleying(p => !p);
   }
 
+  useEffect(() => {
+    function hideMenu(event){
+      if(menuRef.current && !menuRef.current.contains(event.target) && menuBtnRef.current !== event.target){
+        setIsmenuDisplay(p => !p);
+      }
+    }
+
+    document.addEventListener('click', hideMenu);
+    return () => {
+    document.removeEventListener('click', hideMenu);
+    }
+  })
+
     return (
       <>
           <div className='post'>
-          <button onClick={() => {
-           menuRef.current.style.display = menuRef.current.style.display === "none" ? "block" : "none";
+          <button ref={menuBtnRef} onClick={() => {
+           setIsmenuDisplay(p => !p);
           }} className='Post__menu'><MoreHorizRoundedIcon /></button>
-            <div className="post__options__menu" ref={menuRef}>
+            {isMenuDisplay && <div className="post__options__menu" ref={menuRef}>
             {uid === currentUser ? <div onClick={() => deletePost(id)} className="delete">Delete Post</div> :
             <>
               <div className="delete">Block User</div>
               <div className="delete">Report</div>
-            </>
-            }
-            </div>
+            </>}
+            </div>}
         <div className="avatar">
-            <img className='avatar__pic' src={photoURL ? photoURL : '/avatar.png'} alt="" />
+            <Link to={'/profile/' + uid}>
+              <img className='avatar__pic' src={photoURL ? photoURL : '/avatar.png'} alt="" />  
+            </Link>
         </div>
         <div className="post__info">
             <div className="user__info">
-                <h1 className="name">{name}</h1>
-                <h2 className="username">{username}</h2>
+                <Link to={'/profile/' + uid}>
+                  <h1 className="name">{name}</h1>
+                  <h2 className="username">{username}</h2>
+                </Link>
+                
             </div>
             <p className="description">{description}</p>
             {postImg && <div className='post_pic_container'><img className='post__pic' src={postImg} alt="" /></div>}

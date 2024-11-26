@@ -8,7 +8,7 @@ import { auth, db } from "./firebase.js";
 import { useDispatch } from 'react-redux';
 import { getUser } from './features/user/userSlice.js';
 import { doc, getDoc } from 'firebase/firestore';
-import { useNavigate } from 'react-router';
+import { Outlet, useNavigate } from 'react-router';
 
 
 
@@ -58,7 +58,7 @@ function App() {
   return (
     <div className="App">
           <Sidebar authenticated={authenticated} signout={signout} />
-          <Feed />
+            <Outlet />
           <Widgets/>
     </div>
   );
