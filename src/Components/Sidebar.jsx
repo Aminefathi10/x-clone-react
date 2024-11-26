@@ -22,7 +22,8 @@ function Sidebar({signout, authenticated}) {
   const secondRef = useRef(null);
   const shadowRef = useRef(null);
   const containerRef = useRef(null);
-    const [width, setWidth] = useState(window.innerWidth);
+  const [width, setWidth] = useState(window.innerWidth);
+  
     useEffect(() => {
       window.addEventListener("resize", handleWidth);
       return () => {
@@ -32,6 +33,9 @@ function Sidebar({signout, authenticated}) {
     
     const handleWidth = () => {
       setWidth(window.innerWidth);
+      if (menuRef.current.style.transform === 'translateX(-50%)') {
+        menuRef.current.style.transform = 'translateX(0)';
+      }
   }
 
  async function handleMenu(c){

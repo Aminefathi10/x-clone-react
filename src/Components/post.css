@@ -19,14 +19,14 @@
     border: none;
     outline: none;
     position: absolute;
-    top: 0.5em;
+    top: 0.25em;
     right: 0.5em;
     cursor: pointer;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 2.5em;
-    width: 2.5em;
+    height: 2.3em;
+    width: 2.3em;
     border-radius: 9999px;
     color: #00b7ff;
 }
@@ -34,10 +34,12 @@
     background-color: #00b7ff41;
     
 }
+.Post__menu *{
+    z-index: -1;
+}
 
 
 .post .post__options__menu{
-    display: none;
     position: absolute;
     box-shadow:0 0 5px white;
     background-color: black;
@@ -63,12 +65,16 @@
     flex-direction: column;
 }
 .post .post__info .user__info{
-    display: flex;
-    margin-top: 0.2em;
     font-family: "Manrope", sans-serif;
     cursor: pointer;
 }
-.post .post__info .user__info h1{
+.user__info a{
+    color: inherit;
+    text-decoration: none;
+    display: flex;
+    margin-top: 0.2em;
+}
+.post .post__info .user__info a h1{
     font-size: 1.1em;
     font-weight: 300;
     margin: .1em;
