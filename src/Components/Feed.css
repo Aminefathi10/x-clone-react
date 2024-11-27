@@ -2,13 +2,18 @@
     flex: 0.5;
     border-left: solid 1px #4d4d4d;
     border-right: solid 1px #4d4d4d;
+    position: relative;
 }
 .Header{
     width:full;
     color: black;
     display: flex;
-    height: 2.5rem;
+    height: 2.8rem;
     border-bottom: solid 1px #4d4d4d;
+    position: sticky;
+    top: 0;
+    background-color: #000000ec;
+    z-index: 999;
 }
 .head{
     flex: 1;
