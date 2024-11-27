@@ -56,11 +56,11 @@ function App() {
     
   }
   return (
-    <div className="App">
+    <main>
           <Sidebar authenticated={authenticated} signout={signout} />
             <Outlet />
           <Widgets/>
-    </div>
+    </main>
   );
 }
 

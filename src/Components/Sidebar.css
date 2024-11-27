@@ -199,4 +199,7 @@
         top: 0;
         left: 0;
     }
+    .loginIcon{
+        margin-left: -5px
+    }
 }
