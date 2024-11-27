@@ -1,7 +1,7 @@
-import CommentIcon from '@mui/icons-material/Comment';
-import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
-import FavoriteIcon from '@mui/icons-material/Favorite';
-import CachedIcon from '@mui/icons-material/Cached';
+import CommentIcon from '../assets/SVGs/CommentIcon';
+import FavoriteBorderIcon from '../assets/SVGs/LikeIcon';
+import FavoriteIcon from '../assets/SVGs/LikedIcon';
+import CachedIcon from '../assets/SVGs/RepostIcon';
 import MoreHorizRoundedIcon from '@mui/icons-material/MoreHorizRounded';
 import { db } from '../firebase';
 import { updateDoc, doc, increment, arrayUnion, arrayRemove } from 'firebase/firestore';

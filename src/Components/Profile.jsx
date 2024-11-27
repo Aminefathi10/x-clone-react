@@ -33,6 +33,8 @@ export default function Profile() {
 
             }
          })
+         document.body.scrollTop = 0;
+        document.documentElement.scrollTop = 0;
              
        }, []);
 
@@ -49,10 +51,11 @@ export default function Profile() {
         </div>
       </div>
       <div className={style.user_data}>
+            <button style={{position: 'absolute', top: 10, right: 10, padding: '10px 25px', background: 'white', color: 'black', fontWeight: 700, borderRadius: 9999}}>Follow</button>
             <h1 className={style.name}>{userData.name}</h1>
             <h2 className={style.username}>{userData.username}</h2>
             <p className={style.bio}></p>
-            <h2 className={style.joining_date}><CalendarMonthRoundedIcon />joined </h2>
+            <h2 className={style.joining_date}><CalendarMonthRoundedIcon />joined Nov 2024</h2>
         </div>
         <div className={style.follows}>
             <h1><span>{userData.followers?.length}</span> followers</h1>
