@@ -24,7 +24,7 @@
     "dev": "vite --port 3000",
     "build": "vite build",
     "lint": "eslint .",
-    "preview": "vite preview --port 4000 --host 192.168.146.29",
+    "preview": "vite preview --port 4000",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
     "test": "VITE_CJS_TRACE=true vite dev"

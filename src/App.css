@@ -1,4 +1,4 @@
-.App{
+main{
     margin: 0 auto;
     display: flex;
     min-width: 250px;
@@ -11,7 +11,7 @@ i{
 }
 /* phone screen UI */
 @media screen and (max-width: 440px) {
-    .App{
+    main{
         flex-direction: column-reverse;
         position: relative;
         height: 100vh;

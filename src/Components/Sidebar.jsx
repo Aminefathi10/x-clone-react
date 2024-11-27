@@ -14,7 +14,7 @@ import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder';
 import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
 import LogoutIcon from '@mui/icons-material/Logout';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
-import LoginIcon from '@mui/icons-material/Login';
+import LoginIcon from '../assets/SVGs/LoginIcon';
 
 
 function Sidebar({signout, authenticated}) {
@@ -91,7 +91,7 @@ function Sidebar({signout, authenticated}) {
             <button><SidebarOption styleClass='SidebarOption' icon={<BookmarkBorderIcon className="i" />} title="Bookmarks" /></button>
             <button><SidebarOption styleClass='SidebarOption' icon={<XIcon className="i" />} title="Premium" /></button>
             <button><SidebarOption styleClass='SidebarOption' icon={<AttachMoneyIcon className="i" />} title="Monitization" /></button>
-            <button onClick={signout}><SidebarOption styleClass='SidebarOption' icon={authenticated ? <LogoutIcon className="i" /> : <LoginIcon />} title={authenticated ? "Sign Out" : "Sign In"} /></button>
+            <button onClick={signout}><SidebarOption styleClass='SidebarOption' icon={authenticated ? <LogoutIcon className="i" /> : <LoginIcon className='loginIcon' />} title={authenticated ? "Sign Out" : "Sign Up"} /></button>
             <button className='display-none' onClick={() => handleMenu('')}><SidebarOption styleClass='SidebarOption' icon={<ArrowBackIcon className="i" />} title="Main" /></button>
           </div>
       </div>
