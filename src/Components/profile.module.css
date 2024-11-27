@@ -6,7 +6,7 @@
 }
 
 .image_container {
-    width: 7em;
+    width: 5.8em;
     aspect-ratio: 1/1;
     position: absolute;
     left: 1.5em;
@@ -25,8 +25,9 @@
 }
 .user_data{
     padding: 0.3em;
-    padding-top: 3.7em;
+    padding-top: 3em;
     font-family: "Manrope", sans-serif;
+    position: relative;
 }
 .name{
     font-size: 1.5em;
@@ -92,8 +93,8 @@
 
 .top_bar nav h1{
     margin: 1px;
-    padding: 10px 0;
-    font-size: 1.3em;
+    padding: 5px 0;
+    font-size: 1.1em;
     color: white;
     font-weight: 400;
     font-family: "Manrope", sans-serif;

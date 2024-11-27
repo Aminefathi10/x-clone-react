@@ -6,6 +6,9 @@
     transform-origin: top;
     animation: renderPost 100ms;
 }
+.post:hover{
+    background-color: #aaaaaa11;
+}
 @keyframes renderPost {
     0%{
     transform: scale(0);
