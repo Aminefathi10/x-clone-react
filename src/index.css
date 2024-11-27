@@ -19,6 +19,11 @@ button {
     cursor: pointer;
     width: fit-content;
   }
+  a:has(.SidebarOption){
+    font-size: 0.8em;
+    margin: 0;
+    padding: 1px 6px;
+  }
 *{
     box-sizing: border-box;
     -webkit-tap-highlight-color: transparent;
@@ -26,17 +31,17 @@ button {
 
 
 body::-webkit-scrollbar {
-    width: 5px;               /* width of the entire scrollbar */
+    width: 5px;           
   }
   
   body::-webkit-scrollbar-track {
-    background: rgba(0, 0, 0, 0);        /* color of the tracking area */
+    background: rgba(0, 0, 0, 0);       
   }
   
   body::-webkit-scrollbar-thumb {
-    background-color: rgb(179, 179, 179);    /* color of the scroll thumb */
-    border-radius: 20px;       /* roundness of the scroll thumb */
-    border: none;  /* creates padding around scroll thumb */
+    background-color: rgb(179, 179, 179);   
+    border-radius: 20px;    
+    border: none;  
   }
 
 @font-face {

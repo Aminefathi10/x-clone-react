@@ -9,6 +9,7 @@ import { BrowserRouter, Routes, Route } from "react-router";
 import Login from "./pages/Login.jsx";
 import Feed from './Components/Feed.jsx';
 import Profile from './Components/Profile.jsx';
+import Search from './pages/search.jsx'
 
 
 
@@ -22,6 +23,7 @@ root.render(
           <Route element={<App />} >
             <Route path='/' element={<Feed />} />
             <Route path='/profile/:user_id' element={<Profile />} />
+          <Route path='/search' element={<Search />} />
           </Route>
           <Route path='/signup' element={<Login />} />
         </Routes>

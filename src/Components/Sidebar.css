@@ -28,8 +28,9 @@
     position: relative;
     overflow-x: hidden;
 }
-.sidebar button{
+.sidebar a, .sidebar button{
     color: white;
+    text-decoration: none;
 }
 .Post{
     color: white;
@@ -128,10 +129,10 @@
     .sidebar:not(.sidebar.secondary) .SidebarOption{
         justify-content: start;
     }
-    .sidebar button *{
+    .sidebar button *, .sidebar a *{
         font-size: 1.3em;
     }
-    .sidebar button{
+    .sidebar button, .sidebar a{
         width: 60px;
     }
      .SidebarOption h1, .Post{
@@ -186,9 +187,6 @@
     }
     .SidebarOption:first {
         font-size: 1.5em;
-    }
-    .SidebarOption button{
-        gap: 2em;
     }
     .shadow{
         width: 100vw;
