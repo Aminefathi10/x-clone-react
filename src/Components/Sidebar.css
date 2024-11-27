@@ -200,6 +200,7 @@
         left: 0;
     }
     .loginIcon{
-        margin-left: -5px
+        margin-left: -17px;
+        color: #fff;
     }
 }
