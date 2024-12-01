@@ -67,9 +67,8 @@ useEffect(() => {
   function handleFeed(clickedIndex){
     
     parentRefs.current.forEach((ref, index) => {
-      console.log('functinon called')
       if (ref) {
-        const child = ref.querySelector('h1');
+        const child = ref.querySelector('h1')
         if (index === clickedIndex) {
           child.classList.add('foryou__folowing');
         } else {

@@ -50,18 +50,17 @@ function Sidebar({signout, authenticated}) {
       if(c === 'more'){
         secondRef.current.classList.remove('display-none');
         await new Promise(res => setTimeout(res, 10));
-      containerRef.current.classList.add('overflow-visible');
-      secondRef.current.classList.add('show-more');
-      shadowRef.current.style.display = 'block';
-      document.body.style.transform = 'scale(0.98)';
+        containerRef.current.classList.add('overflow-visible');
+        secondRef.current.classList.add('show-more');
+        shadowRef.current.style.display = 'block';
+        document.body.style.transform = 'scale(0.98)';
     } else {
-      secondRef.current.classList.remove('show-more');
-      shadowRef.current.style.display = 'none';
-      document.body.style.transform = 'scale(1)';
-      await new Promise(res => setTimeout(res, 200));
-      containerRef.current.classList.remove('overflow-visible');
-      secondRef.current.classList.add('display-none');
-
+        secondRef.current.classList.remove('show-more');
+        shadowRef.current.style.display = 'none';
+        document.body.style.transform = 'scale(1)';
+        await new Promise(res => setTimeout(res, 200));
+        containerRef.current.classList.remove('overflow-visible');
+        secondRef.current.classList.add('display-none');
     }
     }
     
