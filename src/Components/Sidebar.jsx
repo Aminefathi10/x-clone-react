@@ -53,11 +53,11 @@ function Sidebar({signout, authenticated}) {
         containerRef.current.classList.add('overflow-visible');
         secondRef.current.classList.add('show-more');
         shadowRef.current.style.display = 'block';
-        document.body.style.transform = 'scale(0.98)';
+        // document.body.style.transform = 'scale(0.98)';
     } else {
         secondRef.current.classList.remove('show-more');
         shadowRef.current.style.display = 'none';
-        document.body.style.transform = 'scale(1)';
+        // document.body.style.transform = 'scale(1)';
         await new Promise(res => setTimeout(res, 200));
         containerRef.current.classList.remove('overflow-visible');
         secondRef.current.classList.add('display-none');

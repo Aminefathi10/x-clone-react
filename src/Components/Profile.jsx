@@ -33,8 +33,9 @@ export default function Profile() {
 
             }
          })
-         document.body.scrollTop = 0;
-        document.documentElement.scrollTop = 0;
+        window.scrollTo({
+          top: 0
+        })
              
        }, []);
 
