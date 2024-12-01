@@ -14,7 +14,7 @@
     transform: translateY(50%);
     border-radius: 50%;
     overflow: hidden;
-    padding: 3px;
+    padding: 1.2px;
     background-color: #ffffff;
 }
 .image_container img {

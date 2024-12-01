@@ -109,6 +109,7 @@
         background-color: #000000d3;
         overflow: hidden;
     }
+    
     .overflow-visible{
         overflow: visible !important;
     }
@@ -156,10 +157,11 @@
         border-radius: 15px;
         bottom: 0;
         background-color: #000000;
+        border: solid 1px #4d4d4d;
         height: fit-content;
         z-index: 999 !important;
         align-items: start;
-        transform: translateY(100%);
+        transform: translateY(105%);
         transition: 200ms ease-in-out;
     }
     .sidebar.secondary button{
@@ -189,6 +191,7 @@
         font-size: 1.5em;
     }
     .shadow{
+        display: none;
         width: 100vw;
         height: 100vh;
         background-color: #ffffff00;
