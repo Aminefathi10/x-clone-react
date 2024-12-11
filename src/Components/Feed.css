@@ -71,7 +71,7 @@
     align-items: center;  
     object-fit: cover;
 }
-.CreatePost .top__post input{
+.CreatePost .top__post textarea{
     flex: 1;
     padding: 10px;
     border: none;
@@ -80,7 +80,13 @@
     background-color: transparent;
     color: white;
     font-weight: 300;
+    font-family: Arial, Helvetica, sans-serif;
+    resize: none;
 }
+#post_input::-webkit-scrollbar {
+    width: 0px;           
+  }
+  
 .CreatePost .bottom__post{
     width: 100%;
     display: flex;
@@ -118,7 +124,11 @@
     background-color: #00b7ff;
     font-size: 0.9em;
     border-radius: 9999px;
-    padding: 0.3em 1em;
+    width: 4.5em;
+    height: 1.5em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     cursor: pointer;
 }
 @media screen and (max-width: 640px) {

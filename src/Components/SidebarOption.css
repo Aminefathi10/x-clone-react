@@ -76,7 +76,7 @@ a.active .SidebarOption, .SidebarOption:hover{
         margin-bottom: 0;
     }
     .SidebarOption *{
-        font-size: 2.1em !important;
+        font-size: 2em !important;
         margin: 0;
     }
     .SidebarOption:hover, .SidebarOption:focus{

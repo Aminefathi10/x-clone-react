@@ -52,8 +52,9 @@
     right: 2em;
 }
 .post .post__options__menu div{
-    padding: 0.25em 1em;
+    padding: 0.4em 1em;
     cursor: pointer;
+    font-size: 1.2em;
 }
 .post .post__options__menu div:hover{
     background-color: #31313171;
@@ -70,6 +71,7 @@
 .post .post__info .user__info{
     font-family: "Manrope", sans-serif;
     cursor: pointer;
+    width: fit-content;
 }
 .user__info a{
     color: inherit;
@@ -92,8 +94,7 @@
     color: #aaa;
 }
 .post .post__info .description{
-    margin: 5px 0.1em;
-    margin-bottom: 5px;
+    margin: 0 0.1em;
     font-weight: 200;
 }
 /* .post_pic_container{

@@ -32,7 +32,6 @@ export default function Comment({post: {name, username, photoURL, description}, 
         })
     }
 
-    const receivers = ['@amine', '@adil', '@khalid']
   return (
     <>
         <main className={style.container}>
@@ -57,7 +56,7 @@ export default function Comment({post: {name, username, photoURL, description}, 
                 </div>
             </div>
             <p className={style.replyTo}>
-                {receivers.map((r, i) => `${r} ${receivers[i+1] ? 'and ' : ''}`)}
+                reply to {username}
             </p>
             <div className={style.body}>
                 <div className={style.avatar}>

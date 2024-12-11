@@ -110,6 +110,7 @@
     anchor-name: --bottom;
     aspect-ratio: 1/1;
     border-radius: 50%;
+    object-fit: cover;
 }
 .body > form{
     padding: 5px 0;
