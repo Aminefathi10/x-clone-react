@@ -127,14 +127,13 @@
         padding: 0 4px;
         overflow: hidden;
     }
-    .sidebar:not(.sidebar.secondary) .SidebarOption{
+    .sidebar.secondary .SidebarOption{
         justify-content: start;
     }
-    .sidebar button *, .sidebar a *{
-        font-size: 1.3em;
-    }
-    .sidebar button, .sidebar a{
+    .sidebar:not(.secondary) button, .sidebar:not(.secondary) a{
         width: 60px;
+        display: flex;
+        justify-content: center;
     }
      .SidebarOption h1, .Post{
         display: none;
@@ -197,11 +196,7 @@
         background-color: #ffffff00;
         z-index: 998;
         position: fixed;
-        top: 0;
+        top: 0;                        
         left: 0;
-    }
-    .loginIcon{
-        margin-left: -17px;
-        color: #fff;
     }
 }

@@ -64,13 +64,20 @@ a.active .SidebarOption, .SidebarOption:hover{
 }
 
 @media screen and (max-width: 440px) {
-    .SidebarOption{
-        justify-content: start;
-    }
+    
     .SidebarOption .i{
-        font-size: 1.2em !important;
+        transform: translateX(0);
+    }
+    .SidebarOption{
+        justify-content: center;
+        margin-left: 0;
+    }
+    .sidebar:not(.secondary) .SidebarOption{
+        margin-bottom: 0;
+    }
+    .SidebarOption *{
+        font-size: 2.1em !important;
         margin: 0;
-        margin-left: -16px;
     }
     .SidebarOption:hover, .SidebarOption:focus{
         background-color: unset;
