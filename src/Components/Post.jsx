@@ -12,6 +12,9 @@ import { likePost, dislikePost, repost, rmReposts } from '../features/user/userS
 import { useNavigate, Link } from 'react-router';
 import Comment from './addComment';
 
+const arabicAl = 'ابتثجحخدذرزسشصضطظعغفقكلمنهوي';
+
+
 
 export default function Post({post : { uid, description, postImg, likes, id, name, username, photoURL, comments, postReposts }, deletePost, currentUser}){
 
@@ -41,7 +44,7 @@ export default function Post({post : { uid, description, postImg, likes, id, nam
       return;
     }
     if(!reposts.includes(id)){
-      updateDoc(doc(db, 'user', currentUser), {
+      updateDoc(doc(db, 'users', currentUser), {
         reposts: arrayUnion(id)
       });
       updateDoc(doc(db, 'Posts', id), {
@@ -50,7 +53,7 @@ export default function Post({post : { uid, description, postImg, likes, id, nam
       dispatch(repost(id));
       setIsReposted(true);
     } else {
-      updateDoc(doc(db, 'user', currentUser), {
+      updateDoc(doc(db, 'users', currentUser), {
         reposts: arrayRemove(id)
       });
       updateDoc(doc(db, 'Posts', id), {
@@ -73,7 +76,7 @@ export default function Post({post : { uid, description, postImg, likes, id, nam
       updateDoc(doc(db, 'Posts', id), {
       likes: increment(1)
     });
-    updateDoc(doc(db, 'users', uid), {
+    updateDoc(doc(db, 'users', currentUser), {
       likedPosts: arrayUnion(id)
     })
     } else {
@@ -82,7 +85,7 @@ export default function Post({post : { uid, description, postImg, likes, id, nam
         updateDoc(doc(db, 'Posts', id), {
         likes: increment(-1)
       });
-      updateDoc(doc(db, 'users', uid), {
+      updateDoc(doc(db, 'users', currentUser), {
         likedPosts: arrayRemove(id)
       })
     }
@@ -141,7 +144,7 @@ export default function Post({post : { uid, description, postImg, likes, id, nam
                 </Link>
                 
             </div>
-            <p className="description">{description}</p>
+            <p dir={arabicAl.includes(description[0]) ? 'rtl' : 'ltr'} className="description">{description}</p>
             {postImg && <div className='post_pic_container'><img className='post__pic' src={postImg} alt="" /></div>}
             <div className="post__options">
               <button onClick={displayRepForm} className='react_btn comment'>
