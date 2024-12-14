@@ -34,7 +34,7 @@ export default function Comment({post: {name, username, photoURL, description}, 
 
   return (
     <>
-        <main className={style.container}>
+        <div className={style.container}>
             <div className={style.top}>
                 <button onClick={hideForm} title='close'>
                     <CloseIcon />
@@ -84,7 +84,7 @@ export default function Comment({post: {name, username, photoURL, description}, 
                     </div>
                 </form>
             </div>
-        </main>
+        </div>
         <div onClick={hideForm} style={{position: 'fixed', width: '100vw', height: '100vh', zIndex: 10, top: 0, left: 0, background: '#fff1'}} />
     </>
     

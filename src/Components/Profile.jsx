@@ -48,7 +48,7 @@ export default function Profile() {
     <div className="Feed">
       <div className={style.profile_pics}>
         <div className={style.image_container}>
-          <img src={userData.photoURL ? userData.photoURL : '/avatar'} alt="" />
+          <img src={userData.photoURL ? userData.photoURL : '/avatar.png'} alt="" />
         </div>
       </div>
       <div className={style.user_data}>

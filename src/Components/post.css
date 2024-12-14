@@ -46,15 +46,15 @@
     position: absolute;
     box-shadow:0 0 5px white;
     background-color: black;
-    border-radius: 10px;
+    border-radius: 3px;
     box-shadow: #494949;
     top: 2em;
     right: 2em;
 }
 .post .post__options__menu div{
-    padding: 0.4em 1em;
+    padding: 0.2em 1em;
     cursor: pointer;
-    font-size: 1.2em;
+    font-size: 1.1em;
 }
 .post .post__options__menu div:hover{
     background-color: #31313171;
@@ -97,9 +97,9 @@
     margin: 0 0.1em;
     font-weight: 200;
 }
-/* .post_pic_container{
-
-} */
+.post_pic_container{
+    margin-top: 5px;
+}
 .post__pic{
     width: max-content;
     max-width: 95%;

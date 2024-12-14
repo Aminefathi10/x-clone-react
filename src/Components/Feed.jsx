@@ -1,16 +1,18 @@
 import "./Feed.css";
 import Post from "./Post";
-import { useEffect, useRef, useState } from "react";
+import { Suspense, useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
 import { db } from "../firebase";
 import { collection, onSnapshot, addDoc, query, orderBy, serverTimestamp, deleteDoc, doc } from "firebase/firestore";
 import { supabase } from "../supabase";
 import { useNavigate } from "react-router";
+import { PostSkeleton } from "../ui/skeletons";
 import ImageRoundedIcon from '@mui/icons-material/ImageRounded';
 import PollRoundedIcon from '@mui/icons-material/PollRounded';
 import EmojiEmotionsRoundedIcon from '@mui/icons-material/EmojiEmotionsRounded';
 import CalendarMonthRoundedIcon from '@mui/icons-material/CalendarMonthRounded';
 
+  const arabicAl = 'ابتثجحخدذرزسشصضطظعغفقكلمنهوي';
 
 function Feed() {
   const collRef = collection(db, "Posts");
@@ -22,6 +24,15 @@ function Feed() {
   const [isRequired, setIsRequired] = useState(true);
   const [loading, setLoading] = useState(false)
   const [ posts, setPosts ] = useState([]);
+
+  function handleInputChange(event){
+    if(arabicAl.includes(event.target.value[0])){
+      event.target.dir = 'rtl';
+    } else {
+      event.target.dir = 'ltr';
+    }
+  }
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     const image = e.target.image.files[0];
@@ -36,8 +47,10 @@ function Feed() {
         .from('posts')
         .upload(uid + image.name, image);
         imageUrl = 'https://johfsmvefdzgdnajkofj.supabase.co/storage/v1/object/public/posts/' + data?.path;
-        if(error){
-          alert('try another image')
+        if(error.error === 'Duplicate'){
+          console.log(error);
+          imageUrl = 'https://johfsmvefdzgdnajkofj.supabase.co/storage/v1/object/public/posts/' + uid + image.name;
+          console.log(image.name)
         }
     }
     addDoc(collRef, {
@@ -55,7 +68,7 @@ function Feed() {
       console.log("error adding the post", error)
     });
     setLoading(false)
-
+    setIsRequired(true)
     e.target.reset();
   };
 
@@ -102,7 +115,7 @@ useEffect(() => {
         <div className="top__post">
           {/* <i className="fa-solid fa-user"></i> */}
           <img src={photoURL ? photoURL : '/avatar.png'} className="userAvatar" alt='a' /> 
-          <textarea autocomplete="off" id="post_input" name="post_input" type="text" placeholder="What's up?!" required={isRequired} />
+          <textarea onChange={handleInputChange} autocomplete="off" id="post_input" name="post_input" type="text" placeholder="What's up?!" required={isRequired} />
         </div>
 
         
@@ -122,7 +135,7 @@ useEffect(() => {
         </div>
       </form>
       <div className="posts">
-      { posts.map(post => <Post post={post} deletePost={deletePost} key={post.id}  likedPosts={likedPosts} currentUser={uid} />)  }
+          { posts.map(post => <Post post={post} deletePost={deletePost} key={post.id}  likedPosts={likedPosts} currentUser={uid} />)  }
       </div>
     </div>
   )
