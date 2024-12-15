@@ -8,6 +8,7 @@ import { getUser } from '../features/user/userSlice.js';
 import { doc, setDoc } from 'firebase/firestore';
 import { useNavigate } from 'react-router';
 import XIcon from '@mui/icons-material/X';
+import Alert from '../Components/alert.jsx';
 
 const linkRegEx = /https:\/\/[^\s/]+\/[^\s]*/;
 
@@ -16,6 +17,7 @@ export default function Login() {
     const dispatch = useDispatch();
     const Route = useNavigate();
     const [loading, setLoading] = useState();
+    const [error, setError] = useState(null);
 
     const[signUp, setSignup] = useState(true);
     const inputRefs = useRef(null);
@@ -47,8 +49,9 @@ export default function Login() {
         }
         
           if(signUp){
-            setLoading(p => !p)
-               await  createUserWithEmailAndPassword(auth, event.target.email.value, event.target.password.value)
+            setLoading(true)
+            try { 
+             await createUserWithEmailAndPassword(auth, event.target.email.value, event.target.password.value)
                 .then((creds) => {
                   updateProfile(creds.user, {
                     displayName: event.target.fullName.value,
@@ -78,26 +81,34 @@ export default function Login() {
 
                       Route('/')
                     });
-                  }).catch((error) => { 
-                    console.log(error);
                   });
                 });
-                setLoading(p => !p)
+            } catch (err) {
+              setError('Password should be at least 6 characters');
+              setTimeout(() => setError(null), 2000)
+            }
+                setLoading(false)
                 
               } else {
-                setLoading(p => !p)
-               await signInWithEmailAndPassword(auth, event.target.email.value, event.target.password.value).then(() => {
+                setLoading(true)
+                try {
+                  await signInWithEmailAndPassword(auth, event.target.email.value, event.target.password.value).then(() => {
                     Route('/');
-                });
-                setLoading(p => !p)
+                })
+                } catch (err) {
+                  setError('Incorrect password or email');
+                  setTimeout(() => setError(null), 2000)
+                }
+                setLoading(false)
               }
         
       }
     
   return (
+    <>
+        {error && <Alert error={error} />}
     <div className="authInterface">
         <XIcon className="icon" />
-        
         <form className="loginForm" onSubmit={signUpForm} >
             <div ref={inputRefs}>
                 <div className="input__cont">
@@ -127,6 +138,6 @@ export default function Login() {
         </form>
         
     </div>
-      
+    </>
   )
 }
