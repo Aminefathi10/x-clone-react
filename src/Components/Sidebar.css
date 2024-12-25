@@ -106,7 +106,8 @@
         bottom: 0;
         top: unset;
         z-index: 999;
-        background-color: #000000d3;
+        background-color: #000b;
+        backdrop-filter: blur(10px);
         overflow: hidden;
     }
     

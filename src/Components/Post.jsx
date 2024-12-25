@@ -4,13 +4,14 @@ import FavoriteIcon from '../assets/SVGs/LikedIcon';
 import CachedIcon from '../assets/SVGs/RepostIcon';
 import MoreHorizRoundedIcon from '@mui/icons-material/MoreHorizRounded';
 import { db } from '../firebase';
-import { updateDoc, doc, increment, arrayUnion, arrayRemove } from 'firebase/firestore';
+import { updateDoc, doc, increment, arrayUnion, arrayRemove, getDoc } from 'firebase/firestore';
 import "./post.css"
 import { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { likePost, dislikePost, repost, rmReposts } from '../features/user/userSlice';
 import { useNavigate, Link } from 'react-router';
 import Comment from './addComment';
+import { PostSkeleton } from '../ui/skeletons';
 
 const arabicAl = 'ابتثجحخدذرزسشصضطظعغفقكلمنهوي';
 
@@ -23,6 +24,16 @@ export default function Post({post : { uid, description, postImg, likes, id, nam
   const {userAvatar, reposts, likedPosts} = useSelector(state => state.user.user);
   const [isRepleying, setIsRepleying] = useState(false);
   const [isMenuDisplay, setIsmenuDisplay] = useState(false);
+  const [author, setAuthor] = useState(null);
+
+  getDoc(doc(db, 'users', uid)).then(data => {
+    const user = data.data();
+    setAuthor({
+      name: user.name,
+      username: user?.username,
+      photoURL: user?.photoURL
+    })
+  })
     
 
   const menuRef = useRef(null);
@@ -38,7 +49,9 @@ export default function Post({post : { uid, description, postImg, likes, id, nam
     
   }, [currentUser])
 
-  function handleRepost(){
+  function handleRepost(event){
+    event.preventDefault();
+    event.stopPropagation();
     if(!currentUser){
       route('/signup')
       return;
@@ -65,7 +78,9 @@ export default function Post({post : { uid, description, postImg, likes, id, nam
     
   }
 
-  function handlePostLike(){
+  function handlePostLike(event){
+    event.preventDefault();
+    event.stopPropagation();
     if(!currentUser){
       route('/signup')
       return;
@@ -92,7 +107,9 @@ export default function Post({post : { uid, description, postImg, likes, id, nam
     
   }
 
-  function displayRepForm(){
+  function displayRepForm(event){
+    event.preventDefault();
+    event.stopPropagation();
     if(!currentUser){
       route('/signup')
       return;
@@ -119,7 +136,7 @@ export default function Post({post : { uid, description, postImg, likes, id, nam
   })
 
     return (
-      <>
+      <>{author ? 
           <div className='post'>
           <button ref={menuBtnRef} onClick={() => {
            setIsmenuDisplay(p => !p);
@@ -133,17 +150,18 @@ export default function Post({post : { uid, description, postImg, likes, id, nam
             </div>}
         <div className="avatar">
             <Link to={'/profile/' + uid}>
-              <img className='avatar__pic' src={photoURL ? photoURL : '/avatar.png'} alt="" />  
+              <img className='avatar__pic' src={author?.photoURL ? author?.photoURL : '/avatar.png'} alt="" />  
             </Link>
         </div>
         <div className="post__info">
             <div className="user__info">
                 <Link to={'/profile/' + uid}>
-                  <h1 className="name">{name}</h1>
-                  <h2 className="username">{username}</h2>
+                  <h1 className="name">{author?.name}</h1>
+                  <h2 className="username">{author?.username}</h2>
                 </Link>
                 
             </div>
+            <Link style={{textDecoration: 'none', color: 'inherit'}} to={'/post/' + id}>
             <p dir={arabicAl.includes(description[0]) ? 'rtl' : 'ltr'} className="description">{description}</p>
             {postImg && <div className='post_pic_container'><img className='post__pic' src={postImg} alt="" /></div>}
             <div className="post__options">
@@ -160,8 +178,9 @@ export default function Post({post : { uid, description, postImg, likes, id, nam
               <p style={{color: isReposted ? '#00990d' : 'inherit'}}>{postReposts}</p>
               </button>
             </div>
+            </Link>
         </div>
-      </div>
+      </div> : <PostSkeleton /> }
       { isRepleying && <Comment post={{name, username, photoURL, description}} user={userAvatar} hideForm={displayRepForm} id={id} uid={currentUser} /> }
     </>
     )
