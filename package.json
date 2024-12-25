@@ -25,7 +25,7 @@
   },
   "scripts": {
     "serve": "nodemon backend/index.js",
-    "dev": "vite --port 3000 --host  192.168.234.29",
+    "dev": "vite --port 3000 --host  192.168.178.29",
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview --port 4000",

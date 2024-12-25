@@ -1,0 +1,100 @@
+.user_data{
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    padding: 5px;
+}
+.user_data img{
+    width: 2.5em ;
+    aspect-ratio: 1/1;
+    border-radius: 999px;
+    object-fit: cover;
+}
+.user_info{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    justify-content: space-between;
+    width: 100%;
+}
+.user_info p{
+    font-size: 1.1em;
+    font-weight: 300;
+    margin: 0;
+    padding: 0;
+    font-family: "Manrope", Helvetica, sans-serif;
+}
+.username{
+    margin-top: -5px !important;
+    color: rgb(102, 102, 102);
+}
+
+.sub_btn button{
+    background-color: white;
+    padding: 8px 25px;
+    border-radius: 999px;
+    font-weight: 600;
+}
+.des{
+    padding: 5px;
+    margin: 0;
+    font-size: 1.1em;
+    font-weight: 300;
+}
+.post_body img{
+    width: calc(100% - 10px);
+    margin: 0 5px;
+    border-radius: 10px;
+}
+.postedAt{
+    border-bottom: 1px solid #555;
+    margin: 0 5px;
+    height: 2.6em;
+}
+.postedAt p{
+    padding: 0;
+    margin: 0;
+    color: #888;
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+.engagement_data{
+    display: flex;
+    justify-content: space-around;
+    border-bottom: 1px solid #555;
+    margin: 0 5px;
+    height: 2.6em;
+    
+}
+.engagement_data p{
+    margin: 0;
+    transition: 200ms;
+    flex: 1;
+    text-align: center;
+    padding: 12px 0;
+    cursor: default;
+}
+.engagement_data p:hover{
+    background-color: #5554;
+}
+.label{
+    margin-left: 5px;
+    color: #555;
+}
+.reacts{
+    display: flex;
+    justify-content: space-around;
+    margin: 0 5px;
+    height: 2.6em;
+    border-bottom: 1px solid #555;
+}
+.reacts button{
+    padding: 8px;
+    font-size: 1.5em;
+    color: #555;
+    display: flex;
+}
+.icon{
+    font-size: 1em !important;
+}
