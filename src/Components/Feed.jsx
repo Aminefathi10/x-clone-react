@@ -23,7 +23,7 @@ function Feed() {
 
   const [isRequired, setIsRequired] = useState(true);
   const [loading, setLoading] = useState(false)
-  const [ posts, setPosts ] = useState([]);
+  const [ posts, setPosts ] = useState(null);
 
   function handleInputChange(event){
     if(arabicAl.includes(event.target.value[0])){
@@ -135,7 +135,8 @@ useEffect(() => {
         </div>
       </form>
       <div className="posts">
-          { posts.map(post => <Post post={post} deletePost={deletePost} key={post.id}  likedPosts={likedPosts} currentUser={uid} />)  }
+          {posts ? posts.map(post => <Post post={post} deletePost={deletePost} key={post.id}  likedPosts={likedPosts} currentUser={uid} />)  
+          : <img width={25} style={{display: 'block', margin: '10px auto'}} src="/x-loading.gif" />}
       </div>
     </div>
   )
