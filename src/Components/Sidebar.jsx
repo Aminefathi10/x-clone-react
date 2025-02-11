@@ -15,6 +15,7 @@ import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
 import LogoutIcon from '@mui/icons-material/Logout';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import LoginIcon from '../assets/SVGs/LoginIcon';
+import HdrAutoIcon from '@mui/icons-material/HdrAuto';
 import { NavLink } from 'react-router';
 
 
@@ -74,7 +75,7 @@ function Sidebar({signout, authenticated}) {
        <div ref={menuRef} className='optionsWrapper'>
         <div className='sidebar'>
             <NavLink to='/'><SidebarOption styleClass='SidebarOption' icon={<HomeIcon className="i" />} title="Home" /></NavLink>
-            <NavLink to='/search'><SidebarOption styleClass='SidebarOption' icon={<SearchIcon className="i" />} title="Search" /></NavLink>
+            <NavLink to='/Assistly'><SidebarOption styleClass='SidebarOption' icon={<HdrAutoIcon className="i" />} title="Assistly" /></NavLink>
             <button><SidebarOption styleClass='SidebarOption' icon={<NotificationsIcon className="i" />} title="Notifications" /></button>
             <button><SidebarOption styleClass='SidebarOption' icon={<MarkunreadIcon className="i" />} title="Messages" /></button>
             <button className='display-none'><SidebarOption styleClass='SidebarOption' icon={<PeopleIcon className="i" />} title="Comunities" /></button>

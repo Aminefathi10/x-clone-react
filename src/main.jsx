@@ -25,7 +25,7 @@ root.render(
             <Route path='/' element={<Feed />} />
             <Route path='/profile/:user_id' element={<Profile />} />
             <Route path='/post/:post_id' element={<PostDetails />} />
-          <Route path='/search' element={<Search />} />
+          <Route path='/Assistly' element={<Search />} />
           </Route>
           <Route path='/signup' element={<Login />} />
         </Routes>
