@@ -1,5 +1,5 @@
 const { OpenAI } = require("openai");
-// const dotenv = require('dotenv');
+const dotenv = require('dotenv');
 
 const baseURL = "https://api.aimlapi.com/v1";
 
