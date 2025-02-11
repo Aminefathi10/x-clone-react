@@ -6,21 +6,23 @@ import { useState } from 'react'
 export default function search() {
 
   const [messages, setMessages] = useState([]);
+  const [userInput, setUserInput] = useState('');
 
  async function handleSubmit(event){
     event.preventDefault();
+    event.target.prompt.value = '';
     setMessages(p => [...p, {
       type: 'prompt',
-      value: event.target.prompt.value
+      value: userInput
     }]);
     try {
-      const res = await fetch("http://localhost:8000", {
+      const res = await fetch("https://x-clone-react-psi.vercel.app/generate", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        prompt: event.target.prompt.value,
+        prompt: userInput,
       })
     })
     .then(res => res.json());
@@ -33,8 +35,6 @@ export default function search() {
     } catch (err) {
       console.log(err)
     }
-    
-
   }
 
 
@@ -46,10 +46,10 @@ export default function search() {
         }
       </div>
       <form onSubmit={handleSubmit} className='user-prompt'>
+        <textarea onChange={e => setUserInput(e.target.value)} required name='prompt' placeholder='Ask anything...' rows='5'></textarea>
         <button onClick={postMessage} className="submit-prompt">
           <SendIcon className="" />
         </button>
-        <textarea name='prompt' placeholder='Ask anything...' rows='5'></textarea>
       </form>
     </div>
   )

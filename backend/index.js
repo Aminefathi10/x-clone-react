@@ -1,7 +1,9 @@
 const getResponse = require('./ai/index');
 const express = require('express');
 const cors = require('cors');
-const port = 8000;
+const dotenv = require('dotenv');
+dotenv.config();
+const PORT = process.env.PORT || 8000;
 
 const app = express();
 
@@ -16,7 +18,7 @@ app.use((req, res, next) => {
 });
 
 // POST route
-app.post("/", async (req, res) => {
+app.post("/generate", async (req, res) => {
     const { prompt } = req.body;
 
     if(!prompt) {
@@ -38,4 +40,4 @@ app.post("/", async (req, res) => {
    
 });
 
-module.exports = app
+app.listen(PORT, () => console.log('Server is running'))
