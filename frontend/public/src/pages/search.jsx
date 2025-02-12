@@ -16,7 +16,7 @@ export default function search() {
       value: userInput
     }]);
     try {
-      const res = await fetch("https://x-clone-react-psi.vercel.app/generate", {
+      const res = await fetch("http://localhost:8000/generate", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -31,9 +31,8 @@ export default function search() {
       type: 'response',
       value: res.res
     }]);
-    console.log(messages)
     } catch (err) {
-      console.log(err)
+      console.log(err.massage)
     }
   }
 
