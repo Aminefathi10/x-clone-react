@@ -7,10 +7,12 @@ export default function search() {
 
   const [messages, setMessages] = useState([]);
   const [userInput, setUserInput] = useState('');
+  const [loading, setLoading] = useState(false);
 
  async function handleSubmit(event){
     event.preventDefault();
     event.target.prompt.value = '';
+    setLoading(true);
     setMessages(p => [...p, {
       type: 'prompt',
       value: userInput
@@ -26,7 +28,7 @@ export default function search() {
       })
     })
     .then(res => res.json());
-
+    setLoading(false);
     setMessages(p => [...p, {
       type: 'response',
       value: res.res
@@ -43,6 +45,7 @@ export default function search() {
         {
           messages.map((message, i) => <p key={message.type + '_' + i} className={message.type}>{message.value}</p>)
         }
+        {loading && <h3 style={{fontSize: '1.1em', fontWeight: 400, color: '#FFF5'}}>Thinking...</h3>}
       </div>
       <form onSubmit={handleSubmit} className='user-prompt'>
         <textarea onChange={e => setUserInput(e.target.value)} required name='prompt' placeholder='Ask anything...' rows='5'></textarea>
