@@ -3,7 +3,7 @@ const express = require('express');
 const cors = require('cors');
 const dotenv = require('dotenv');
 dotenv.config();
-const PORT = process.env.PORT || 8000;
+const PORT = 8000;
 
 const app = express();
 
@@ -32,7 +32,7 @@ app.post("/generate", async (req, res) => {
         res: completion.choices[0].message.content
     }) 
     } catch (err) {
-        console.log(err);
+        console.log(err.message);
         res.status(500).json({
             massage: 'please try again latter'
         })
