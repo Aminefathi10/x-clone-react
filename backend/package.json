@@ -9,7 +9,8 @@
     "openai": "^4.83.0"
   },
   "scripts": {
-    "start": "nodemon index"
+    "dev": "nodemon index",
+    "build": "node index"
   },
   "keywords": [],
   "author": "",
