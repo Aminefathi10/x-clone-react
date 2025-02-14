@@ -11,11 +11,11 @@ app.use(cors());
 app.use(express.json());
 
 // Middleware to log requests
-// app.use((req, res, next) => {
-//   console.log(`[${new Date().toISOString()}] ${req.method} ${req.url}`);
-//   console.log("Request Body:", req.body); // Log request body
-//   next();
-// });
+app.use((req, res, next) => {
+  console.log(`[${new Date().toISOString()}] ${req.method} ${req.url}`);
+  console.log("Request Body:", req.body); // Log request body
+  next();
+});
 
 // POST route
 app.post("/generate", async (req, res) => {
@@ -40,5 +40,5 @@ app.post("/generate", async (req, res) => {
    
 });
 
-// app.listen(PORT, () => console.log('Server is running'))
-module.exports = app;
+app.listen(PORT, () => console.log('Server is running'))
+// module.exports = app;
