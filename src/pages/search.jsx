@@ -1,6 +1,7 @@
 import SendIcon from '@mui/icons-material/Send';
 import './ai.css';
-import { useState } from 'react'
+import { useState } from 'react';
+import axios from 'axios';
 
 
 export default function search() {
@@ -18,7 +19,7 @@ export default function search() {
       value: userInput
     }]);
     try {
-      const res = await fetch("http://localhost:8000/generate", {
+      const res = await fetch("http://localhost:3000/api/generate", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
