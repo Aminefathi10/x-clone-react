@@ -40,5 +40,5 @@ app.post("/generate", async (req, res) => {
    
 });
 
-app.listen(PORT, () => console.log('Server is running'))
-// module.exports = app;
+// app.listen(PORT, () => console.log('Server is running'))
+module.exports = app;
