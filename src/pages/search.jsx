@@ -19,7 +19,7 @@ export default function search() {
       value: userInput
     }]);
     try {
-      const res = await fetch("http://localhost:3000/api/generate", {
+      const res = await fetch("http://localhost:8000/generate", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
