@@ -6,6 +6,7 @@
   "dependencies": {
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.0",
+    "@google/generative-ai": "^0.22.0",
     "@mui/icons-material": "^6.4.4",
     "@mui/material": "^6.4.4",
     "@reduxjs/toolkit": "^2.5.1",
@@ -26,12 +27,13 @@
     "react-router": "^7.1.5",
     "react-router-dom": "^7.1.5",
     "react-scripts": "^3.4.4",
+    "socket.io": "^4.8.1",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
     "start": "nodemon api/index",
     "dev": "vite --port 3000",
-    "build": "vite build",
+    "build": "vite build --outDir api/dist",
     "lint": "eslint .",
     "preview": "vite preview --port 4000",
     "test": "VITE_CJS_TRACE=true vite dev"

@@ -17,7 +17,7 @@ import PostDetails from './pages/post-details.jsx';
 
 const root = ReactDOM.createRoot(document.body);
 root.render(
-  <React.StrictMode>
+  // <React.StrictMode>
     <Provider store={store}>
       <BrowserRouter>
         <Routes>
@@ -31,7 +31,7 @@ root.render(
         </Routes>
       </BrowserRouter>
     </Provider>
-  </React.StrictMode>
+  // </React.StrictMode>
 );
 
 reportWebVitals();
