@@ -75,7 +75,7 @@
     width: fit-content;
     max-width: 80%;
     background-color: #222;
-    padding: 5px;
+    padding: 10px;
     border-radius: 5px;
     margin-left: auto;
     margin-right: 10px;
@@ -89,10 +89,26 @@
     max-width: 80%;
     background-color: #ffffff;
     color: black;
-    padding: 5px;
+    padding: 10px;
     border-radius: 5px;
     margin-left: 10px;
     margin-top: 10px;
     margin-bottom: 10px;
     font-size: medium;
 }
+
+.gradient-text {
+    font-weight: bold;
+    width: fit-content;
+    background: linear-gradient(90deg, #646464, #161616, #646464);
+    background-size: 200% 100%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: gradient-move 1s linear infinite;
+  }
+
+  @keyframes gradient-move {
+    0% { background-position: 200% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+  

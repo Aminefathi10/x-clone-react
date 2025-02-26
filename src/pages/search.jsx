@@ -1,12 +1,19 @@
 import SendIcon from '@mui/icons-material/Send';
 import './ai.css';
-import { useState } from 'react';
-import axios from 'axios';
+import { useState, useEffect } from 'react';
+
+
+const ioConfig = {
+  withCredentials: true,
+};
+const socket = io();
 
 
 export default function search() {
 
+
   const [messages, setMessages] = useState([]);
+  // const [resChuncks, setResChunks] = useState([]);
   const [userInput, setUserInput] = useState('');
   const [loading, setLoading] = useState(false);
 
@@ -19,25 +26,27 @@ export default function search() {
       value: userInput
     }]);
     try {
-      const res = await fetch("http://localhost:8000/generate", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        prompt: userInput,
-      })
-    })
-    .then(res => res.json());
-    setLoading(false);
-    setMessages(p => [...p, {
-      type: 'response',
-      value: res.res
-    }]);
+    socket.emit('prompt', userInput);
+    
     } catch (err) {
-      console.log(err.massage)
+      console.log(err)
     }
   }
+
+  useEffect(() => {
+    socket.on('response', createResponse);
+    return () => socket.off('response', createResponse);
+  });
+
+  const createResponse = (result) => {
+    setMessages(p => [...p, {
+      type: 'response',
+      value: result
+    }])
+    setLoading(false);
+  }
+
+  
 
 
   return (
@@ -46,7 +55,7 @@ export default function search() {
         {
           messages.map((message, i) => <p key={message.type + '_' + i} className={message.type}>{message.value}</p>)
         }
-        {loading && <h3 style={{fontSize: '1.1em', fontWeight: 400, color: '#FFF5'}}>Thinking...</h3>}
+        {loading && <h3 className='gradient-text' style={{fontSize: '1.1em', fontWeight: 400, color: '#FFF5'}}>Thinking...</h3>}
       </div>
       <form onSubmit={handleSubmit} className='user-prompt'>
         <textarea onChange={e => setUserInput(e.target.value)} required name='prompt' placeholder='Ask anything...' rows='5'></textarea>
