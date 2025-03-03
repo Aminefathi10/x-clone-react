@@ -4,7 +4,7 @@ const dotenv = require('dotenv');
 
 dotenv.config();
 
-const genAI = new GoogleGenerativeAI(process.env.GEMENI_API_KEY);
+const genAI = new GoogleGenerativeAI('AIzaSyBlGpXgm174XzAaRiOoqwQdZOshTNHe1BI');
 const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
 module.exports = model;

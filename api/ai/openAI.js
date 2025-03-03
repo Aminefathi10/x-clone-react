@@ -5,7 +5,7 @@ const baseURL = "https://api.aimlapi.com/v1";
 
 dotenv.config();
 const api = new OpenAI({
-  apiKey: process.env.AILM_API_KEY,
+  apiKey: '5ec242771f764e559f46d1cb02b69717',
   baseURL,
 });
 
