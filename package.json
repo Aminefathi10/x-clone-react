@@ -2,7 +2,6 @@
   "name": "x-clone",
   "version": "2.0.0",
   "private": true,
-  "homepage": "https://Aminefathi10.github.io/x-clone-react",
   "dependencies": {
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.0",

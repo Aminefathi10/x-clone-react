@@ -6,7 +6,7 @@ import { useState, useEffect } from 'react';
 const ioConfig = {
   withCredentials: true,
 };
-const socket = io();
+const socket = io(ioConfig);
 
 
 export default function search() {

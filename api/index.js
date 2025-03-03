@@ -1,4 +1,4 @@
-const getResponse = require('./ai/index');
+const getResponse = require('./ai/openAI');
 const gemeni = require('./ai/gemeni')
 const express = require('express');
 const { join } = require('node:path')
@@ -20,7 +20,7 @@ const ioConfig = {
   };
   
 const server = createServer(app);
-const io = new Server(server);
+const io = new Server(server, ioConfig);
 
 app.use(cors());
 app.use(express.json());
@@ -62,17 +62,16 @@ app.post("/generate", async (req, res) => {
 io.on('connection', socket => {
     console.log('user connected!')
     socket.on('prompt', async prompt => {
-        // console.log(prompt);
+        console.log(prompt);
         // try {
         //     getResponse(socket, 'short', prompt);
         // } catch (err) {
         //     console.log(err)
         // }
         const result = await gemeni.generateContent(prompt);
-        socket.emit('response', result.response.text())
+        socket.emit('response', result.response.text());
     })
 })
 
-// server.listen(PORT, () => console.log('Server is running'))
-module.exports = server
+server.listen(PORT, () => console.log('Server is running'))
 
