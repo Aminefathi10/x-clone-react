@@ -63,13 +63,13 @@ io.on('connection', socket => {
     console.log('user connected!')
     socket.on('prompt', async prompt => {
         console.log(prompt);
-        try {
-            getResponse(socket, 'short', prompt);
-        } catch (err) {
-            console.log(err)
-        }
-        // const result = await gemeni.generateContent(prompt);
-        // socket.emit('response', result.response.text());
+        // try {
+        //     getResponse(socket, 'short', prompt);
+        // } catch (err) {
+        //     console.log(err)
+        // }
+        const result = await gemeni.generateContent(prompt);
+        socket.emit('response', result.response.text());
     })
 })
 
