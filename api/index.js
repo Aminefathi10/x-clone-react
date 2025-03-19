@@ -18,6 +18,7 @@ const ioConfig = {
       credentials: true
     }
   };
+
   
 const server = createServer(app);
 const io = new Server(server, ioConfig);
@@ -27,13 +28,13 @@ app.use(express.json());
 app.use(express.static(join(__dirname, 'dist')))
 
 // Middleware to log requests
-app.use((req, res, next) => {
+app.use((req, _res, next) => {
   console.log(`[${new Date().toISOString()}] ${req.method} ${req.url}`);
   console.log("Request Body:", req.body); // Log request body
   next();
 });
 
-app.get('/', (req, res) => res.sendFile(join(__dirname, 'dist', 'index.html')))
+app.get('/', (_req, res) => res.sendFile(join(__dirname, 'dist', 'index.html')))
 
 // POST route
 app.post("/generate", async (req, res) => {
@@ -63,13 +64,14 @@ io.on('connection', socket => {
     console.log('user connected!')
     socket.on('prompt', async prompt => {
         console.log(prompt);
-        // try {
-        //     getResponse(socket, 'short', prompt);
-        // } catch (err) {
-        //     console.log(err)
-        // }
-        const result = await gemeni.generateContent(prompt);
-        socket.emit('response', result.response.text());
+        try {
+            // getResponse(socket, 'short', prompt);
+            const result = await gemeni.generateContent(prompt);
+            socket.emit('response', result.response.text());
+        } catch (err) {
+            console.log(err);
+            socket.emit('error', 'server error, try again later!');
+        }
     })
 })
 
