@@ -11,7 +11,7 @@ const api = new OpenAI({
 
 const getResponse = async (socket, systemPrompt, userPrompt) => {
   try {
-  const stream = await api.chat.completions.create({
+  return await api.chat.completions.create({
     model: "mistralai/Mistral-7B-Instruct-v0.2",
     messages: [
       {
@@ -26,18 +26,17 @@ const getResponse = async (socket, systemPrompt, userPrompt) => {
     temperature: 0.7,
     max_tokens: 256,
     store: true,
-    stream: true
   });
 
-  for await (const chunk of stream) {
-    // process.stdout.write(chunk.choices[0]?.delta?.content || "");
-    socket.emit('response', chunk.choices[0]?.delta?.content);
-}
+  //   for await (const chunk of stream) {
+    //     process.stdout.write(chunk.choices[0]?.delta?.content || "");
+    //     socket.emit('response', chunk.choices[0]?.delta?.content);
+    // }
   } catch (err) {
     throw err
   }
-
   // const response = completion.choices[0].message.content;
+  
 };
 
 
