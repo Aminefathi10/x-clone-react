@@ -6,6 +6,7 @@ const { Server } = require('socket.io');
 const { createServer } = require('node:http');
 const cors = require('cors');
 const dotenv = require('dotenv');
+const mainSocket = require('./sockets/main')
 dotenv.config();
 const PORT = 8000;
 
@@ -60,20 +61,7 @@ app.post("/generate", async (req, res) => {
 });
 
 
-io.on('connection', socket => {
-    console.log('user connected!')
-    socket.on('prompt', async prompt => {
-        console.log(prompt);
-        try {
-            // getResponse(socket, 'short', prompt);
-            const result = await gemeni.generateContent(prompt);
-            socket.emit('response', result.response.text());
-        } catch (err) {
-            console.log(err);
-            socket.emit('error', 'server error, try again later!');
-        }
-    })
-})
+io.on('connection', mainSocket);
 
 server.listen(PORT, () => console.log('Server is running'))
 
