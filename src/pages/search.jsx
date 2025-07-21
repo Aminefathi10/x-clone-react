@@ -27,7 +27,7 @@ export default function search() {
       type: 'prompt',
       value: userInput
     }]);
-    scrollToLastMessage();
+    // scrollToLastMessage();
     try {
     socket.emit('prompt', userInput);
     
