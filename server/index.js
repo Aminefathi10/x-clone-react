@@ -28,43 +28,16 @@ const io = new Server(server, ioConfig);
 
 app.use(cors());
 app.use(express.json());
+app.use(logEvents);
 
-// app.use(logEvents);
+app.use('/', require('./routes/root'))
 app.use('/posts', postsHandler);
 app.use(express.static(join(__dirname, 'dist')));
 
 
-// Middleware to log requests
-app.use((req, _res, next) => {
-  console.log(`[${new Date().toISOString()}] ${req.method} ${req.url}`);
-  console.log("Request Body:", req.body); // Log request body
-  next();
-});
 
-app.get('/', (_req, res) => res.sendFile(join(__dirname, 'dist', 'index.html')))
+// app.get('/', (_req, res) => res.sendFile(join(__dirname, 'dist', 'index.html')))
 
-// POST route
-app.post("/generate", async (req, res) => {
-    const { prompt } = req.body;
-
-    if(!prompt) {
-        return res.status(400).json({
-            message: 'please enter a prompt'
-        });   
-    }
-    try { 
-        const completion = await getResponse('short', prompt);
-        res.status(200).json({
-        res: completion.choices[0].message.content
-    }) 
-    } catch (err) {
-        console.log(err.message);
-        res.status(500).json({
-            massage: 'please try again latter'
-        })
-    }
-   
-});
 
 
 io.on('connection', mainSocket);
