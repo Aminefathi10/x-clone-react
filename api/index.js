@@ -6,7 +6,9 @@ const { Server } = require('socket.io');
 const { createServer } = require('node:http');
 const cors = require('cors');
 const dotenv = require('dotenv');
-const mainSocket = require('./sockets/main')
+const mainSocket = require('./sockets/main');
+const { logEvents } = require('./middleware/logger');
+const postsHandler = require('./routes/postsController')
 dotenv.config();
 const PORT = 8000;
 
@@ -26,7 +28,11 @@ const io = new Server(server, ioConfig);
 
 app.use(cors());
 app.use(express.json());
-app.use(express.static(join(__dirname, 'dist')))
+
+// app.use(logEvents);
+app.use('/posts', postsHandler);
+app.use(express.static(join(__dirname, 'dist')));
+
 
 // Middleware to log requests
 app.use((req, _res, next) => {

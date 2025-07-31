@@ -11,6 +11,7 @@ import ImageRoundedIcon from '@mui/icons-material/ImageRounded';
 import PollRoundedIcon from '@mui/icons-material/PollRounded';
 import EmojiEmotionsRoundedIcon from '@mui/icons-material/EmojiEmotionsRounded';
 import CalendarMonthRoundedIcon from '@mui/icons-material/CalendarMonthRounded';
+import { ConstructionOutlined } from "@mui/icons-material";
 
   const arabicAl = 'ابتثجحخدذرزسشصضطظعغفقكلمنهوي';
 
@@ -33,7 +34,53 @@ function Feed() {
     }
   }
 
-  const handleSubmit = async (e) => {
+  function fetchPosts(){
+    fetch('http://localhost:8000/posts').then(res => res.json()).then(snap => {
+
+    setPosts(snap)
+  })
+  }
+
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
+  //   const image = e.target.image.files[0];
+  //   let imageUrl = null;
+  //   if(!uid){
+  //     route('/signup')
+  //     return;
+  //   }
+  //   if(image){
+  //     setLoading(true);
+  //     const { data, error } = await supabase.storage
+  //       .from('posts')
+  //       .upload(uid + image.name, image);
+  //       imageUrl = 'https://johfsmvefdzgdnajkofj.supabase.co/storage/v1/object/public/posts/' + data?.path;
+  //       if(error.error === 'Duplicate'){
+  //         console.log(error);
+  //         imageUrl = 'https://johfsmvefdzgdnajkofj.supabase.co/storage/v1/object/public/posts/' + uid + image.name;
+  //         console.log(image.name)
+  //       }
+  //   }
+  //   addDoc(collRef, {
+  //     uid: uid,
+  //     name: name,
+  //     username: username,
+  //     photoURL: photoURL,
+  //     description: e.target.post_input.value,
+  //     postImg: imageUrl,
+  //     likes: 0,
+  //     reposts: 0,
+  //     comments: 0,
+  //     postedAt: serverTimestamp()
+  //   }).catch(error => {
+  //     console.log("error adding the post", error)
+  //   });
+  //   setLoading(false)
+  //   setIsRequired(true)
+  //   e.target.reset();
+  // };
+
+    const handleSubmit = async (e) => {
     e.preventDefault();
     const image = e.target.image.files[0];
     let imageUrl = null;
@@ -53,42 +100,71 @@ function Feed() {
           console.log(image.name)
         }
     }
-    addDoc(collRef, {
-      uid: uid,
-      name: name,
-      username: username,
-      photoURL: photoURL,
-      description: e.target.post_input.value,
-      postImg: imageUrl,
-      likes: 0,
-      reposts: 0,
-      comments: 0,
-      postedAt: serverTimestamp()
-    }).catch(error => {
-      console.log("error adding the post", error)
-    });
+    
+    fetch('http://localhost:8000/posts', {
+      method: 'POST',
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        uid,
+        description: e.target.post_input.value,
+        postImg: imageUrl,
+        likes: 0,
+        reposts: 0,
+        comments: 0,
+        postedAt: serverTimestamp()
+      })
+    })
+    .then(res => {
+          fetch('http://localhost:8000/posts/' + res).then(res => res.json())
+          .then(res => setPosts(p => [...p, res]))
+          .catch((err) => {
+            console.log(err)
+          })
+        })
+    
+    .catch(err => {
+      console.log(err)
+    })
+    
     setLoading(false)
     setIsRequired(true)
     e.target.reset();
   };
 
-useEffect(() => {
- onSnapshot(q, function(snap) {
-  const docsArr = [];
-      snap.docs.forEach(doc => {
-        docsArr.push({...doc.data(), id: doc.id})
-      })
-    setPosts(docsArr)
-  }) 
+// useEffect(() => {
+//  onSnapshot(q, function(snap) {
+//   const docsArr = [];
+//       snap.docs.forEach(doc => {
+//         docsArr.push({...doc.data(), id: doc.id})
+//       })
+//     setPosts(docsArr)
+//   }) 
       
-}, [])
+// }, []);
+
+useEffect(fetchPosts, [])
 
 
-  function deletePost (id) {
-    const docRef = doc(collRef, id)
-    deleteDoc(docRef)
+
+
+  // function deletePost (id) {
+  //   const docRef = doc(collRef, id)
+  //   deleteDoc(docRef)
+  // }
+
+ function deletePost (id) {
+    fetch('http://localhost:8000/posts', {
+      method: 'delete',
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JOSN.stringify({ id })
+    }).then(() => {
+      setPosts(p => p.filter(i => i.id === id))
+    })
   }
-  
 
   const parentRefs = useRef([]);
   function handleFeed(clickedIndex){
