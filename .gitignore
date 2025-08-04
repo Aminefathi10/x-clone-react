@@ -11,11 +11,11 @@
 /coverage
 
 # production
-api/dist
+server/dist
 dist
 /tests
-api/services/x-react-87a4d-firebase-adminsdk-uc02w-816ce718f1.json
-api/events
+server/services/x-react-87a4d-firebase-adminsdk-uc02w-816ce718f1.json
+server/events
 
 # misc
 .DS_Store
