@@ -32,7 +32,7 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "nodemon api/index",
+    "start": "nodemon server/index",
     "dev": "vite --port 3000",
     "build": "vite build --outDir api/dist",
     "lint": "eslint .",

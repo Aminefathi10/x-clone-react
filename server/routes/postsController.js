@@ -27,7 +27,7 @@ router.route('/').get(async (req, res) => {
     .post(async (req, res) => {
         try {
             const response = await postsRef.add(req.body);
-            res.send(response.id)
+            res.send({ id: response.id })
         } catch (error) {
             res.status(401).end()
         }

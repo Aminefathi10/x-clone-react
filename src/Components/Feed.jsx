@@ -115,10 +115,10 @@ function Feed() {
         comments: 0,
         postedAt: serverTimestamp()
       })
-    })
+    }).then(res => res.json())
     .then(res => {
-          fetch('http://localhost:8000/posts/' + res).then(res => res.json())
-          .then(res => setPosts(p => [...p, res]))
+          fetch('http://localhost:8000/posts/' + res.id).then(res => res.json())
+          .then(res => setPosts(p => [res, ...p]))
           .catch((err) => {
             console.log(err)
           })
@@ -162,7 +162,7 @@ useEffect(fetchPosts, [])
       },
       body: JOSN.stringify({ id })
     }).then(() => {
-      setPosts(p => p.filter(i => i.id === id))
+      setPosts(p => p.filter(i => i.id !== id))
     })
   }
 
