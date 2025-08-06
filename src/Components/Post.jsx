@@ -17,7 +17,7 @@ const arabicAl = 'ابتثجحخدذرزسشصضطظعغفقكلمنهوي';
 
 
 
-export default function Post({post : { uid, description, postImg, likes, id, name, username, photoURL, comments, postReposts }, deletePost, currentUser}){
+export default function Post({post : { uid, description, postImg, likes, id, name, username, photoURL, comments, reposts: postReposts }, deletePost, currentUser}){
 
   const dispatch = useDispatch();
   const route = useNavigate();
@@ -26,20 +26,25 @@ export default function Post({post : { uid, description, postImg, likes, id, nam
   const [isMenuDisplay, setIsmenuDisplay] = useState(false);
   const [author, setAuthor] = useState(null);
 
-  getDoc(doc(db, 'users', uid)).then(data => {
-    const user = data.data();
-    setAuthor({
-      name: user.name,
-      username: user?.username,
-      photoURL: user?.photoURL
-    })
-  })
+
+  useEffect(() => {
+    fetch(`/users/${uid}`).then(res => res.json()).then(user => {
+      setAuthor({
+        name: user.name,
+        username: user?.username,
+        photoURL: user?.photoURL
+      })
+    }).catch(err => console.log(err.message))
+    
+  }, [])
     
 
   const menuRef = useRef(null);
   const menuBtnRef = useRef(null);
   const [isLiked, setIsLiked] = useState(likedPosts.includes(id));
   const [isReposted, setIsReposted] = useState(reposts.includes(id));
+  const [likesCount, setLikesCount] = useState(likes);
+  const [repostsCount, setRepostsCount] = useState(postReposts);
 
   useEffect(() => {
     if(!currentUser){
@@ -57,23 +62,26 @@ export default function Post({post : { uid, description, postImg, likes, id, nam
       return;
     }
     if(!reposts.includes(id)){
+
       updateDoc(doc(db, 'users', currentUser), {
         reposts: arrayUnion(id)
       });
       updateDoc(doc(db, 'Posts', id), {
-        postReposts: increment(1)
+        reposts: increment(1)
       });
       dispatch(repost(id));
       setIsReposted(true);
+      setRepostsCount(p => p + 1);
     } else {
       updateDoc(doc(db, 'users', currentUser), {
         reposts: arrayRemove(id)
       });
       updateDoc(doc(db, 'Posts', id), {
-        postReposts: increment(-1)
+        reposts: increment(-1)
       });
       dispatch(rmReposts(id));
       setIsReposted(false);
+      setRepostsCount(p => p - 1);
     }
     
   }
@@ -85,8 +93,9 @@ export default function Post({post : { uid, description, postImg, likes, id, nam
       route('/signup')
       return;
     }
-    setIsLiked(true);
     if(!isLiked) {
+      setIsLiked(true);
+      setLikesCount(p => p + 1);
       dispatch(likePost(id));
       updateDoc(doc(db, 'Posts', id), {
       likes: increment(1)
@@ -95,7 +104,8 @@ export default function Post({post : { uid, description, postImg, likes, id, nam
       likedPosts: arrayUnion(id)
     })
     } else {
-      setIsLiked(false);
+        setIsLiked(false);
+        setLikesCount(p => p - 1);
         dispatch(dislikePost(id))
         updateDoc(doc(db, 'Posts', id), {
         likes: increment(-1)
@@ -171,11 +181,11 @@ export default function Post({post : { uid, description, postImg, likes, id, nam
               </button>
               <button onClick={handlePostLike} className='react_btn like'>
               {!isLiked ? <FavoriteBorderIcon /> : <FavoriteIcon style={{color: 'red'}} />}
-              <p style={{color: isLiked ? 'red' : 'inherit'}}>{likes}</p>
+              <p style={{color: isLiked ? 'red' : 'inherit'}}>{likesCount}</p>
               </button>
               <button onClick={handleRepost} className='react_btn retweet'>
               <CachedIcon style={{color: isReposted ? '#00990d' : 'inherit'}} />
-              <p style={{color: isReposted ? '#00990d' : 'inherit'}}>{postReposts}</p>
+              <p style={{color: isReposted ? '#00990d' : 'inherit'}}>{repostsCount}</p>
               </button>
             </div>
             </Link>

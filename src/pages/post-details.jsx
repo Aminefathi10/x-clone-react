@@ -23,29 +23,50 @@ export default function PostDetails() {
     const {likedPosts, uid} = useSelector(store => store.user.user)
     
     useEffect(() => {
-      getDoc(doc(db, 'Posts', post_id)).then(data => {
-        const date = new Date(data.data().postedAt.seconds * 1000);
+      // getDoc(doc(db, 'Posts', post_id)).then(data => {
+      //   const date = new Date(data.data().postedAt.seconds * 1000);
+      //   const hours = date.getHours();
+      //   const mins = date.getMinutes();
+      //   const day = date.getDate();
+      //   const month = months[date.getMonth()];
+      //   const year = date.getFullYear();
+      //   setDate(`${hours}:${mins} ${day} ${month} ${year}`)
+      //   setPost(data.data());
+
+      //   getDocs(collection(doc(db, 'Posts', post_id), 'replies')).then(snap => {
+      //     const docsArr = [];
+      //     snap.docs.forEach(doc => {
+      //       docsArr.push({...doc.data(), id: doc.id})
+      //     })
+      //     setReplies(docsArr)
+      //   })
+      // }).catch(err => console.log((err)));
+      fetch('/posts/' + post_id).then(res => res.json()).then(data => {
+        const date = new Date(data.postedAt._seconds * 1000);
         const hours = date.getHours();
         const mins = date.getMinutes();
         const day = date.getDate();
         const month = months[date.getMonth()];
         const year = date.getFullYear();
         setDate(`${hours}:${mins} ${day} ${month} ${year}`)
-        setPost(data.data());
+        setPost(data);
 
-        getDocs(collection(doc(db, 'Posts', post_id), 'replies')).then(snap => {
-          const docsArr = [];
-          snap.docs.forEach(doc => {
-            docsArr.push({...doc.data(), id: doc.id})
-          })
-          setReplies(docsArr)
-        })
-      }).catch(err => console.log((err)));
+        fetch(`/posts/${post_id}/replies`).then(res => res.json()).then(data => {
+          setReplies(data);
+        }).catch(err => console.log(err.message));
+      }).catch(err => console.log(err.message));
     }, [])
       
  function deletePost (id) {
-    const docRef = doc(collRef, id)
-    deleteDoc(docRef)
+    fetch('/posts/' + id + '/replies', {
+      method: 'delete',
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({ id })
+    }).then(() => {
+      setPosts(p => p.filter(i => i.id !== id))
+    })
   }
   return (
     <>

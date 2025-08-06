@@ -42,15 +42,40 @@ router.route('/').get(async (req, res) => {
         
     });
 
-router.route('/:id').get(async (req, res) => {
-    try {
-        const snap = await postsRef.doc(req.params.id).get();
-        res.json(snap.data())
-    } catch (error) {
-        res.status(401).end();
-    }
-    
-})
+    router.route('/:id').get(async (req, res) => {
+        try {
+            const snap = await postsRef.doc(req.params.id).get();
+            res.json(snap.data())
+        } catch (error) {
+            res.status(401).end();
+        }
+        
+    })
 
+    router.route('/:id/replies').get(async (req, res) => {
+        try {
+            const snap = await postsRef.doc(req.params.id).collection('replies').get();
+            const posts = [];
+            snap.forEach(doc => {
+                posts.push({
+                    id: doc.id,
+                    ...doc.data()
+                });
+            });
+
+            res.json(posts)
+        } catch (error) {
+            res.status(401).end();
+        }
+        
+    })
+    .delete(async (req, res) => {
+        try {
+            const response = await postsRef.doc(req.params.id).collection('replies').doc(req.body.id).delete();
+            res.json(response);
+        } catch (error) {
+            res.status(401).send('the document povided does not exist');
+        }
+    });
 
 module.exports = router;

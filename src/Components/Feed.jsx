@@ -35,50 +35,12 @@ function Feed() {
   }
 
   function fetchPosts(){
-    fetch('http://localhost:8000/posts').then(res => res.json()).then(snap => {
+    fetch('/posts').then(res => res.json()).then(snap => {
 
     setPosts(snap)
   })
   }
 
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault();
-  //   const image = e.target.image.files[0];
-  //   let imageUrl = null;
-  //   if(!uid){
-  //     route('/signup')
-  //     return;
-  //   }
-  //   if(image){
-  //     setLoading(true);
-  //     const { data, error } = await supabase.storage
-  //       .from('posts')
-  //       .upload(uid + image.name, image);
-  //       imageUrl = 'https://johfsmvefdzgdnajkofj.supabase.co/storage/v1/object/public/posts/' + data?.path;
-  //       if(error.error === 'Duplicate'){
-  //         console.log(error);
-  //         imageUrl = 'https://johfsmvefdzgdnajkofj.supabase.co/storage/v1/object/public/posts/' + uid + image.name;
-  //         console.log(image.name)
-  //       }
-  //   }
-  //   addDoc(collRef, {
-  //     uid: uid,
-  //     name: name,
-  //     username: username,
-  //     photoURL: photoURL,
-  //     description: e.target.post_input.value,
-  //     postImg: imageUrl,
-  //     likes: 0,
-  //     reposts: 0,
-  //     comments: 0,
-  //     postedAt: serverTimestamp()
-  //   }).catch(error => {
-  //     console.log("error adding the post", error)
-  //   });
-  //   setLoading(false)
-  //   setIsRequired(true)
-  //   e.target.reset();
-  // };
 
     const handleSubmit = async (e) => {
     e.preventDefault();
@@ -101,7 +63,7 @@ function Feed() {
         }
     }
     
-    fetch('http://localhost:8000/posts', {
+    fetch('/posts', {
       method: 'POST',
       headers: {
         "Content-Type": "application/json"
@@ -117,7 +79,7 @@ function Feed() {
       })
     }).then(res => res.json())
     .then(res => {
-          fetch('http://localhost:8000/posts/' + res.id).then(res => res.json())
+          fetch('/posts/' + res.id).then(res => res.json())
           .then(res => setPosts(p => [res, ...p]))
           .catch((err) => {
             console.log(err)
@@ -155,12 +117,12 @@ useEffect(fetchPosts, [])
   // }
 
  function deletePost (id) {
-    fetch('http://localhost:8000/posts', {
+    fetch('/posts', {
       method: 'delete',
       headers: {
         "Content-Type": "application/json"
       },
-      body: JOSN.stringify({ id })
+      body: JSON.stringify({ id })
     }).then(() => {
       setPosts(p => p.filter(i => i.id !== id))
     })

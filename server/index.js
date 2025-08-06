@@ -8,7 +8,8 @@ const cors = require('cors');
 const dotenv = require('dotenv');
 const mainSocket = require('./sockets/main');
 const { logEvents } = require('./middleware/logger');
-const postsHandler = require('./routes/postsController')
+const postsHandler = require('./routes/postsController');
+const usersHandler = require('./routes/usersController');
 dotenv.config();
 const PORT = 8000;
 
@@ -32,6 +33,7 @@ app.use(logEvents);
 
 app.use('/', require('./routes/root'))
 app.use('/posts', postsHandler);
+app.use('/users', usersHandler);
 app.use(express.static(join(__dirname, 'dist')));
 
 
